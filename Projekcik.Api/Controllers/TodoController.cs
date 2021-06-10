@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,7 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult All()
         {
             var todos = _context.Todos
@@ -39,6 +41,7 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateTodoItem(TodoDto item, Guid userId)
         {
             var user = _context.Users.Find(userId);
@@ -58,6 +61,7 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult EditTodoItem(TodoDto item, int id)
         {
             var toEdit = _context.Todos.Find(id);

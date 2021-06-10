@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projekcik.Api.Models;
 
@@ -14,6 +15,7 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IEnumerable<Category> All()
         {
             var categoryList = _context.Categories;
@@ -21,6 +23,7 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateCategory(CategoryDto category)
         {
             _context.Categories.Add(new Category { Name = category.Name });

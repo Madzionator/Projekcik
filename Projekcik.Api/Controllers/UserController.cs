@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Projekcik.Api.Models;
 
@@ -10,19 +11,29 @@ namespace Projekcik.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly TodoDbContext _context;
-        public UserController(TodoDbContext context)
+        private readonly TokenManager _tokenManager;
+
+        public UserController(TodoDbContext context, TokenManager tokenManager)
         {
             _context = context;
+            _tokenManager = tokenManager;
         }
 
-        [HttpGet]
-        public IEnumerable<User> All()
+        [HttpPost("login")]
+        public IActionResult Login(UserDto dto)
         {
-            var usersList = _context.Users;
-            return usersList;
+            var user = _context.Users.FirstOrDefault(x => x.Login == dto.Login);
+            if(user == null)
+                return BadRequest();
+
+            if (user.Password != dto.Password)
+                return BadRequest();
+
+            var token =_tokenManager.GenerateAccessToken(user);
+            return Ok(token);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public IActionResult CreateUser(UserDto user)
         {
             _context.Users.Add(new User { Id = Guid.NewGuid(), Login = user.Login, Password = user.Password, });
