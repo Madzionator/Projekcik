@@ -31,8 +31,8 @@ namespace Projekcik.Api.Controllers
             var todos = _context.Todos
                 .Include(x => x.User)
                 .Include(x => x.Category)
-                .ToList()
-                .Where(x => x.User.Id == _userInfo.Id);
+                .Where(x => x.User.Id == _userInfo.Id)
+                .ToList();
 
             return Ok(todos.Select(x =>
                 new
@@ -46,11 +46,9 @@ namespace Projekcik.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult CreateTodoItem(TodoDto item, Guid userId)
+        public IActionResult CreateTodoItem(TodoDto item)
         {
-            var user = _context.Users.Find(userId);
-            if (user == null)
-                return BadRequest();
+            var user = _userInfo.GetCurrentUser();
 
             _context.Todos.Add(new Todo
             {
@@ -68,9 +66,10 @@ namespace Projekcik.Api.Controllers
         [Authorize]
         public IActionResult EditTodoItem(TodoDto item, int id)
         {
-            var toEdit = _context.Todos.Find(id);
-            if (toEdit == null)
+            var toEdit = _context.Todos.Include(x => x.User).FirstOrDefault(x => x.Id == id);
+            if (toEdit == null || toEdit.User.Id != _userInfo.Id)
                 return BadRequest();
+
             toEdit.Title = item.Title;
             toEdit.Termin = item.Termin;
 
