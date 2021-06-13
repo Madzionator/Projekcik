@@ -1,12 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projekcik.Api.Models
 {
     public class Todo
     {
         public int Id { get; set; }
+
         public string Title { get; set; }
+
         public DateTime Termin { get; set; }
         
         public User User { get; set; }

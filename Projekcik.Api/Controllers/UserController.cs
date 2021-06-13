@@ -26,7 +26,7 @@ namespace Projekcik.Api.Controllers
             if(user == null)
                 return BadRequest();
 
-            if (user.Password != dto.Password)
+            if (!HashPassword.Check(user.Password, dto.Password))
                 return BadRequest();
 
             var token =_tokenManager.GenerateAccessToken(user);
@@ -36,7 +36,7 @@ namespace Projekcik.Api.Controllers
         [HttpPost("create")]
         public IActionResult CreateUser(UserDto user)
         {
-            _context.Users.Add(new User { Id = Guid.NewGuid(), Login = user.Login, Password = user.Password, });
+            _context.Users.Add(new User { Id = Guid.NewGuid(), Login = user.Login, Password = HashPassword.Hash(user.Password), });
             _context.SaveChanges();
 
             return Ok();

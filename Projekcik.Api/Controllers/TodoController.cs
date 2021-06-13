@@ -37,6 +37,7 @@ namespace Projekcik.Api.Controllers
             return Ok(todos.Select(x =>
                 new
                 {
+                    x.Id,
                     x.Termin,
                     x.Title,
                     x.Category
@@ -49,7 +50,6 @@ namespace Projekcik.Api.Controllers
         public IActionResult CreateTodoItem(TodoDto item)
         {
             var user = _userInfo.GetCurrentUser();
-
             _context.Todos.Add(new Todo
             {
                 Title = item.Title,

@@ -10,8 +10,8 @@ using Projekcik.Api.Models;
 namespace Projekcik.Api.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20210606230520_witampozdrawiam")]
-    partial class witampozdrawiam
+    [Migration("20210613220904_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,9 +55,10 @@ namespace Projekcik.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -76,12 +77,17 @@ namespace Projekcik.Api.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Login")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Login")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -103,7 +109,9 @@ namespace Projekcik.Api.Migrations
 
                     b.HasOne("Projekcik.Api.Models.User", "User")
                         .WithMany("Todos")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
