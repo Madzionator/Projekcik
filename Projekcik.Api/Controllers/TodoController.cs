@@ -15,11 +15,13 @@ namespace Projekcik.Api.Controllers
     {
         private readonly TodoDbContext _context;
         private readonly ILogger<TodoController> _logger;
+        private readonly UserInfo _userInfo;
 
-        public TodoController(ILogger<TodoController> logger, TodoDbContext context)
+        public TodoController(ILogger<TodoController> logger, TodoDbContext context, UserInfo userInfo)
         {
             _logger = logger;
             _context = context;
+            _userInfo = userInfo;
         }
 
         [HttpGet]
@@ -29,15 +31,17 @@ namespace Projekcik.Api.Controllers
             var todos = _context.Todos
                 .Include(x => x.User)
                 .Include(x => x.Category)
-                .Select(x => new
+                .ToList()
+                .Where(x => x.User.Id == _userInfo.Id);
+
+            return Ok(todos.Select(x =>
+                new
                 {
-                    x.Id,
-                    x.Title,
                     x.Termin,
-                    User = new { x.User.Id, x.User.Login },
-                });
-            //dlatego to rozwiązanie ^ jest dobre na bardzo proste rzeczy XD  bo ten category to null
-            return Ok(todos);
+                    x.Title,
+                    x.Category
+                })
+            );
         }
 
         [HttpPost]

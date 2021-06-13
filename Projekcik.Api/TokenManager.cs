@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using JWT.Algorithms;
-using JWT.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Projekcik.Api.Models;
 
 namespace Projekcik.Api
@@ -14,7 +15,6 @@ namespace Projekcik.Api
     {
         private readonly IConfiguration _configuration;
 
-        //poprawke ci zrobie do kodu gościa XD 
         public TokenManager(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -22,14 +22,17 @@ namespace Projekcik.Api
 
         public string GenerateAccessToken(User user)
         {
-            var secret = _configuration["Auth:secret"];
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Auth:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            return new JwtBuilder()
-                .WithAlgorithm(new HMACSHA256Algorithm())
-                .WithSecret(Encoding.ASCII.GetBytes(secret))
-                //.AddClaim("exp", DateTimeOffset.UtcNow.AddHours(2).ToUnixTimeSeconds())
-                //.AddClaim("userId", user.Id)
-                .Encode();
+            var token = new JwtSecurityToken(_configuration["Auth:Issuer"],
+                
+                _configuration["Auth:Issuer"],
+                new List<Claim> { new("id", user.Id.ToString()) },
+                expires: DateTime.Now.AddHours(2),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
