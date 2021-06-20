@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mtDa9BRXzPj5brf2A3rtDWsAfWwNALdZJxC8at8+xrOP4zlzvw03kbmCHYCkv3VbVA29rPHUi4eyMNI3hqTqvg==",
+  "dgSpecHash": "VD6bRObJhnVOSxFe3wEIgzNgrvMU7tej/V7zG0lWtAv5XotyIEgaiXGxTAWpirmGrwhckIjSWY/fbvaOoVPt/Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Madzia\\Desktop\\Projekcik.Api\\Projekcik.Api\\Projekcik.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Madzia\\.nuget\\packages\\fluentvalidation\\10.2.3\\fluentvalidation.10.2.3.nupkg.sha512",
+    "C:\\Users\\Madzia\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.2.3\\fluentvalidation.aspnetcore.10.2.3.nupkg.sha512",
+    "C:\\Users\\Madzia\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.2.3\\fluentvalidation.dependencyinjectionextensions.10.2.3.nupkg.sha512",
     "C:\\Users\\Madzia\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Madzia\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.7\\microsoft.aspnetcore.authentication.jwtbearer.5.0.7.nupkg.sha512",
     "C:\\Users\\Madzia\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

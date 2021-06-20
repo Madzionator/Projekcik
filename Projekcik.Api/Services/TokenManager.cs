@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Projekcik.Api.Models;
 
-namespace Projekcik.Api
+namespace Projekcik.Api.Services
 {
-    public class TokenManager
+    public interface ITokenManager
+    {
+        public string GenerateAccessToken(User user);
+    }
+
+    public class TokenManager : ITokenManager
     {
         private readonly IConfiguration _configuration;
 

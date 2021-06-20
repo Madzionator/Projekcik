@@ -12,10 +12,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
+using Projekcik.Api.Controllers;
 using Projekcik.Api.Models;
+using Projekcik.Api.Services;
 
 
 namespace Projekcik.Api
@@ -34,7 +38,8 @@ namespace Projekcik.Api
         {
             services.AddAuthorization();
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserDtoValidator>());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Projekcik.Api", Version = "v1" });
@@ -63,7 +68,8 @@ namespace Projekcik.Api
 
             services.AddDbContext<TodoDbContext>();
             services.AddControllers();
-            services.AddScoped<TokenManager>();
+
+            
 
 
             var key = Configuration["Auth:Key"];
@@ -88,8 +94,11 @@ namespace Projekcik.Api
                     };
                 });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<UserInfo>();
+
+            services.AddScoped<IHashService, HashService>();
+            services.AddScoped<ITokenManager, TokenManager>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,8 +111,7 @@ namespace Projekcik.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Projekcik.Api v1"));
             }
 
-            //app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
             app.UseAuthentication();

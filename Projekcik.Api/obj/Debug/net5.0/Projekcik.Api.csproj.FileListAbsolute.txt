@@ -80,3 +80,6 @@ C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\obj\Debug\net5.0\Projekcik.A
 C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\obj\Debug\net5.0\Projekcik.Api.genruntimeconfig.cache
 C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\obj\Debug\net5.0\Projekcik.Api.csproj.AssemblyReference.cache
 C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\Users\Madzia\Desktop\Projekcik.Api\Projekcik.Api\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll

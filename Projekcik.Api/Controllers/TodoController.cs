@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Projekcik.Api.Models;
+using Projekcik.Api.Services;
 
 namespace Projekcik.Api.Controllers
 {
@@ -50,6 +51,7 @@ namespace Projekcik.Api.Controllers
         public IActionResult CreateTodoItem(TodoDto item)
         {
             var user = _userInfo.GetCurrentUser();
+
             _context.Todos.Add(new Todo
             {
                 Title = item.Title,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Projekcik.Api.Models;
+using Projekcik.Api.Services;
 
 namespace Projekcik.Api.Controllers
 {
@@ -11,22 +12,27 @@ namespace Projekcik.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly TodoDbContext _context;
-        private readonly TokenManager _tokenManager;
+        private readonly ITokenManager _tokenManager;
+        private readonly IHashService _hashService;
 
-        public UserController(TodoDbContext context, TokenManager tokenManager)
+        public UserController(TodoDbContext context, ITokenManager tokenManager, IHashService hashService)
         {
             _context = context;
             _tokenManager = tokenManager;
+            _hashService = hashService;
         }
 
         [HttpPost("login")]
         public IActionResult Login(UserDto dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
             var user = _context.Users.FirstOrDefault(x => x.Login == dto.Login);
             if(user == null)
                 return BadRequest();
 
-            if (!HashPassword.Check(user.Password, dto.Password))
+            if (!_hashService.Check(user.Password, dto.Password))
                 return BadRequest();
 
             var token =_tokenManager.GenerateAccessToken(user);
@@ -36,7 +42,14 @@ namespace Projekcik.Api.Controllers
         [HttpPost("create")]
         public IActionResult CreateUser(UserDto user)
         {
-            _context.Users.Add(new User { Id = Guid.NewGuid(), Login = user.Login, Password = HashPassword.Hash(user.Password), });
+            if (!ModelState.IsValid)
+                return ValidationProblem();
+            _context.Users.Add(new User
+            {
+                Id = Guid.NewGuid(), 
+                Login = user.Login, 
+                Password = _hashService.Hash(user.Password),
+            });
             _context.SaveChanges();
 
             return Ok();
