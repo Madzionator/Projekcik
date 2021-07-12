@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projekcik.Api.Models;
 
 namespace Projekcik.Api.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
         private readonly TodoDbContext _context;

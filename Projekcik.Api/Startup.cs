@@ -1,23 +1,15 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Projekcik.Api.Controllers;
 using Projekcik.Api.Models;
 using Projekcik.Api.Services;
 
@@ -69,7 +61,6 @@ namespace Projekcik.Api
             services.AddDbContext<TodoDbContext>();
             services.AddControllers();
 
-            
 
 
             var key = Configuration["Auth:Key"];
@@ -111,7 +102,8 @@ namespace Projekcik.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Projekcik.Api v1"));
             }
 
-            
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseAuthentication();

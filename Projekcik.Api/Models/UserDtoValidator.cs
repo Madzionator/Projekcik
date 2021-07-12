@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using FluentValidation;
+﻿using FluentValidation;
 using Projekcik.Api.Controllers;
 
 namespace Projekcik.Api.Models
