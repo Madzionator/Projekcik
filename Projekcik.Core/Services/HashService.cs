@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Projekcik.Api.Services
+namespace Projekcik.Core.Services
 {
-    public interface IHashService
-    {
-        public string Hash(string password);
-        public bool Check(string hashed, string password);
-    }
-
-    public class HashService : IHashService
+    internal class HashService : IHashService
     {
         private const string peper = "D18BD57DE8654DFDBCD870510C95354E"; //32
         private const int saltSize = 32;
@@ -35,11 +29,6 @@ namespace Projekcik.Api.Services
         {
             var salt = Convert.FromBase64String(hashed.Split(';')[0]);
             return Hash(password, salt) == hashed;
-        }
-
-        public bool XD()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Projekcik.Api.Migrations
+namespace Projekcik.Database.Migrations
 {
     public partial class init : Migration
     {
@@ -46,7 +46,7 @@ namespace Projekcik.Api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Termin = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: true)

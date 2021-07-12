@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Projekcik.Api.Models;
-using Projekcik.Api.Services;
+using Projekcik.Core.Services;
+using Projekcik.Database;
+using Projekcik.Database.Models;
 
 namespace Projekcik.Api.Controllers
 {
@@ -15,9 +16,9 @@ namespace Projekcik.Api.Controllers
     {
         private readonly TodoDbContext _context;
         private readonly ILogger<TodoController> _logger;
-        private readonly UserInfo _userInfo;
+        private readonly IUserInfo _userInfo;
 
-        public TodoController(ILogger<TodoController> logger, TodoDbContext context, UserInfo userInfo)
+        public TodoController(ILogger<TodoController> logger, TodoDbContext context, IUserInfo userInfo)
         {
             _logger = logger;
             _context = context;
