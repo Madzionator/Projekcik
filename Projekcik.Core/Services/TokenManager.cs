@@ -5,33 +5,31 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Projekcik.Api.Models;
+using Projekcik.Database.Models;
 
-namespace Projekcik.Api.Services
+namespace Projekcik.Core.Services
 {
-    public interface ITokenManager
+    internal class TokenManager : ITokenManager
     {
-        public string GenerateAccessToken(User user);
-    }
-
-    public class TokenManager : ITokenManager
-    {
-        private readonly IConfiguration _configuration;
+        private readonly string _issuer;
+        private readonly string _key;
 
         public TokenManager(IConfiguration configuration)
         {
-            _configuration = configuration;
+            _issuer = configuration["Auth:Issuer"];
+            _key = configuration["Auth:Key"];
         }
 
         public string GenerateAccessToken(User user)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Auth:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_configuration["Auth:Issuer"],
-                
-                _configuration["Auth:Issuer"],
-                new List<Claim> { new("id", user.Id.ToString()) },
+            var claims = new List<Claim> {new("id", user.Id.ToString())};
+
+            var token = new JwtSecurityToken(_issuer,
+                _issuer,
+                claims,
                 expires: DateTime.Now.AddHours(2),
                 signingCredentials: credentials);
 

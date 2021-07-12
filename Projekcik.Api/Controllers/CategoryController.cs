@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Projekcik.Api.Models;
+using Projekcik.Database;
+using Projekcik.Database.Models;
 
 namespace Projekcik.Api.Controllers
 {

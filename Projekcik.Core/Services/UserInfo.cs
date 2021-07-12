@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Projekcik.Api.Models;
+using Projekcik.Database;
+using Projekcik.Database.Models;
 
-namespace Projekcik.Api.Services
+namespace Projekcik.Core.Services
 {
-    public class UserInfo
+    internal class UserInfo : IUserInfo
     {
         private readonly TodoDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -21,12 +23,16 @@ namespace Projekcik.Api.Services
         private IEnumerable<Claim> Claims => _httpContextAccessor?.HttpContext?.User?.Claims;
         private string _id => Claims.FirstOrDefault(x => x.Type == "id")?.Value;
 
-        public bool IsLogged => _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+        public bool IsLogged => _httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
         public Guid Id => _id == null ? Guid.Empty : new Guid(_id);
 
         public User GetCurrentUser()
         {
             var user = _context.Users.Find(Id);
+            if (user == null)
+            {
+                throw new AuthenticationException();
+            }
             return user;
         }
     }

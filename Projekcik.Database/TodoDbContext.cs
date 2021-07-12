@@ -1,15 +1,14 @@
-﻿using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Projekcik.Database.Models;
 
-namespace Projekcik.Api.Models
+namespace Projekcik.Database
 {
     public class TodoDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        public TodoDbContext(DbContextOptions<TodoDbContext> options)
+        : base(options)
         {
-            options.UseSqlServer(Constants.DbConnectionString);
-            options.EnableSensitiveDataLogging(true);
-            options.LogTo((s) => Debug.WriteLine(s));
+
         }
 
         public DbSet<Todo> Todos { get; set; }

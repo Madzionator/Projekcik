@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Projekcik.Api.Models;
+using Projekcik.Database;
 
-namespace Projekcik.Api.Migrations
+namespace Projekcik.Database.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
     partial class TodoDbContextModelSnapshot : ModelSnapshot
@@ -16,10 +16,10 @@ namespace Projekcik.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Projekcik.Api.Models.Category", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace Projekcik.Api.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Projekcik.Api.Models.Todo", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.Todo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,8 +53,7 @@ namespace Projekcik.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -68,7 +67,7 @@ namespace Projekcik.Api.Migrations
                     b.ToTable("Todos");
                 });
 
-            modelBuilder.Entity("Projekcik.Api.Models.User", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,22 +89,22 @@ namespace Projekcik.Api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Projekcik.Api.Models.Category", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.Category", b =>
                 {
-                    b.HasOne("Projekcik.Api.Models.User", "User")
+                    b.HasOne("Projekcik.Database.Models.User", "User")
                         .WithMany("Categories")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Projekcik.Api.Models.Todo", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.Todo", b =>
                 {
-                    b.HasOne("Projekcik.Api.Models.Category", "Category")
+                    b.HasOne("Projekcik.Database.Models.Category", "Category")
                         .WithMany("Todos")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Projekcik.Api.Models.User", "User")
+                    b.HasOne("Projekcik.Database.Models.User", "User")
                         .WithMany("Todos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -116,12 +115,12 @@ namespace Projekcik.Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Projekcik.Api.Models.Category", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.Category", b =>
                 {
                     b.Navigation("Todos");
                 });
 
-            modelBuilder.Entity("Projekcik.Api.Models.User", b =>
+            modelBuilder.Entity("Projekcik.Database.Models.User", b =>
                 {
                     b.Navigation("Categories");
 
