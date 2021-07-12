@@ -1,30 +1,35 @@
 <script>
-	export let name;
+  import Header from "./Header.svelte";
+  import Banner from "./Banner.svelte";
+  import Rectangle from "./Rectangle.svelte";
+
+  let tx = [
+    { content: "tekst1" },
+    { content: "tekst2" },
+    { content: "tekst3" },
+    { content: "🐻" },
+    { content: "🐗" },
+    { content: "X" },
+    { content: "❤" },
+    { content: "👌" },
+  ];
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<Header />
+<Banner />
+
+<div class="container prostokaciki">
+  <div class="row">
+    {#each tx as t}
+      <div class="col-12 col-xs-12 col-md-6 col-lg-3">
+        <Rectangle content={t.content} />
+      </div>
+    {/each}
+  </div>
+</div>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  .prostokaciki > .row > [class*="col-"] {
+    padding: 0;
+  }
 </style>
