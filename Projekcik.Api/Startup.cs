@@ -59,6 +59,8 @@ namespace Projekcik.Api
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
