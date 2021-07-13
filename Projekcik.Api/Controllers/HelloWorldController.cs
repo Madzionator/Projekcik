@@ -14,27 +14,27 @@ namespace Projekcik.Api.Controllers
         public static Dictionary<Guid, string> _texts = new ();
 
         [HttpPost]
-        public IActionResult Post([FromBody] string text)
+        public IActionResult Post([FromBody] TextDto text)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(text.Text))
             {
                 return BadRequest("text cannot be empty");
             }
 
             var id = Guid.NewGuid();
-            _texts.Add(id, text);
+            _texts.Add(id, text.Text);
             return Ok(id.ToString());
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromRoute] Guid id, string text)
+        public IActionResult Put([FromRoute] Guid id, [FromBody] TextDto text)
         {
             if (!_texts.ContainsKey(id))
             {
                 return NotFound("not found");
             }
 
-            _texts[id] = text;
+            _texts[id] = text.Text;
             return NoContent();
         }
 
@@ -59,5 +59,7 @@ namespace Projekcik.Api.Controllers
             _texts.Remove(id);
             return NoContent();
         }
+
+        public record TextDto(string Text);
     }
 }

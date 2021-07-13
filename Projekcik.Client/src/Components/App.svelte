@@ -2,6 +2,7 @@
   import Header from "./Header.svelte";
   import Banner from "./Banner.svelte";
   import Rectangle from "./Rectangle.svelte";
+  import HelloWorld from "./HelloWorld.svelte";
 
   let tx = [
     { content: "tekst1" },
@@ -27,6 +28,8 @@
     {/each}
   </div>
 </div>
+
+<HelloWorld />
 
 <style>
   .prostokaciki > .row > [class*="col-"] {
