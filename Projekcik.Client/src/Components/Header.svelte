@@ -1,6 +1,8 @@
-<div class="container">
-  <div class="global_head">
-    <p>Projekcik</p>
+<div class="header">
+  <div class="container">
+    <div class="global_head">
+      <p>Projekcik</p>
+    </div>
   </div>
 </div>
 
@@ -10,5 +12,9 @@
     font-size: 24px;
     font-weight: bold;
     margin-top: 5px;
+  }
+
+  .header {
+    border-bottom: 1px solid gray;
   }
 </style>

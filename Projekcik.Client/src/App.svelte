@@ -1,8 +1,9 @@
 <script>
-  import Header from "./Header.svelte";
-  import Banner from "./Banner.svelte";
-  import Rectangle from "./Rectangle.svelte";
-  import HelloWorld from "./HelloWorld.svelte";
+  import Banner from "./Components/Banner.svelte";
+
+  import Header from "./Components/Header.svelte";
+  import HelloWorld from "./Components/HelloWorld.svelte";
+  import Rectangle from "./Components/Rectangle.svelte";
 
   let tx = [
     { content: "tekst1" },
@@ -18,7 +19,6 @@
 
 <Header />
 <Banner />
-
 <div class="container prostokaciki">
   <div class="row">
     {#each tx as t}
@@ -28,8 +28,12 @@
     {/each}
   </div>
 </div>
-
 <HelloWorld />
+
+<!-- ^ to przenieść do odpowiednich stron na Pages/ -->
+<!-- <Router {url}> -->
+<!-- <Route path="/"></Route> -->
+<!-- </Router> -->
 
 <style>
   .prostokaciki > .row > [class*="col-"] {

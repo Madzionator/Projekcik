@@ -1,5 +1,5 @@
 // API
-const devUseLocal = true;
+const devUseLocal = false;
 
 const localBaseUrl = "https://localhost:5001/";
 const prodBaseUrl = "https://boar-api.rumsoft.lol/";
