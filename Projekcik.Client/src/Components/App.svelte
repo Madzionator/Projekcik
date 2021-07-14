@@ -8,11 +8,11 @@
     { content: "tekst1" },
     { content: "tekst2" },
     { content: "tekst3" },
-    { content: "🐻" },
-    { content: "🐗" },
     { content: "X" },
+    { content: "🐻" },
+    { content: "😽" },
+    { content: "🐗" },
     { content: "❤" },
-    { content: "👌" },
   ];
 </script>
 
