@@ -1,10 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  import {
-    getHelloWorldList,
-    postHelloWorld,
-    removeHelloWorld,
-  } from "../Services/HelloWorld";
+  import HelloWorldService from "../Services/HelloWorldService";
+
   let texts = [];
   let singleTxt = "";
 
@@ -13,17 +10,21 @@
   });
 
   async function handleClick() {
-    await postHelloWorld({ text: singleTxt });
+    await HelloWorldService.postHelloWorld({ text: singleTxt });
     await Refresh();
   }
 
   async function Refresh() {
-    texts = await getHelloWorldList();
+    texts = await HelloWorldService.getHelloWorldList();
   }
 
-  //   usuwanie:
   async function RemoveItem(id) {
-    await removeHelloWorld(id);
+    await HelloWorldService.removeHelloWorld(id);
+    await Refresh();
+  }
+
+  async function EditItem(id) {
+    await HelloWorldService.editHelloWorld(id, { text: singleTxt });
     await Refresh();
   }
 </script>
@@ -37,7 +38,7 @@
 {#each texts as t}
   <li>
     {t.value}
-    <!-- usuwanie -->
     <button on:click={() => RemoveItem(t.id)}> usun </button>
+    <button on:click={() => EditItem(t.id)}> edytuj </button>
   </li>
 {/each}
