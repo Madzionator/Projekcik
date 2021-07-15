@@ -1,3 +1,7 @@
+<script>
+  import { Link } from "svelte-navigator";
+</script>
+
 <div class="niebieskie">
   <div class="container">
     <div class="banner">
@@ -8,8 +12,10 @@
       </p>
 
       <div class="guziczki">
-        <div class="guziczek">Witam</div>
-        <div class="guziczek">Pozdrawiam</div>
+        <div class="guziczek" role="button"><Link to="witam">Witam</Link></div>
+        <div class="guziczek" role="button">
+          <Link to="pozdrawiam">Pozdrawiam</Link>
+        </div>
       </div>
     </div>
   </div>

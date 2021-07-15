@@ -1,8 +1,16 @@
+<script>
+  import { Link } from "svelte-navigator";
+</script>
+
 <div class="header">
   <div class="container">
     <div class="global_head">
       <p>Projekcik</p>
     </div>
+    <Link to="/">Home</Link>
+    <Link to="witam">Witam</Link>
+    <Link to="pozdrawiam">Pozdrawiam</Link>
+    <Link to="helloworld">HelloWorld</Link>
   </div>
 </div>
 
