@@ -11,6 +11,8 @@
     <Link to="witam">Witam</Link>
     <Link to="pozdrawiam">Pozdrawiam</Link>
     <Link to="helloworld">HelloWorld</Link>
+    <Link to="registration">Registration</Link>
+    <Link to="login">Log In</Link>
   </div>
 </div>
 

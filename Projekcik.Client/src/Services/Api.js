@@ -5,9 +5,12 @@ const axiosAPI = axios.create({
   baseURL: config.baseUrl,
 });
 
+const authTokenKey = "auth_token";
+
 const apiRequest = (method, url, request) => {
+  const moj_token_autoryzacji = window.localStorage.getItem(authTokenKey);
   const headers = {
-    authorization: "",
+    authorization: `Bearer ${moj_token_autoryzacji}`,
     Accept: "application/json",
     "Content-Type": "application/json",
   };
