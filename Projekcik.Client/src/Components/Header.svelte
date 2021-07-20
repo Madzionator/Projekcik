@@ -13,6 +13,7 @@
     <Link to="helloworld">HelloWorld</Link>
     <Link to="registration">Registration</Link>
     <Link to="login">Log In</Link>
+    <Link to="todo">Todos</Link>
   </div>
 </div>
 

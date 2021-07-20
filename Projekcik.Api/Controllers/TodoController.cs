@@ -27,7 +27,7 @@ namespace Projekcik.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult All()
+        public IActionResult GetTodoList()
         {
             var todos = _context.Todos
                 .Include(x => x.User)

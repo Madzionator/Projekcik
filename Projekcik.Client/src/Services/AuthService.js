@@ -9,7 +9,7 @@ export default {
       const token = response;
       window.localStorage.setItem(authTokenKey, token);
     }),
-  logout() {
+  logout: () => {
     window.localStorage.removeItem(authTokenKey);
   },
 };

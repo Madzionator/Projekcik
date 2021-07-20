@@ -7,6 +7,8 @@
   import Error from "./Pages/Error.svelte";
   import Registration from "./Pages/Registration.svelte";
   import LogIn from "./Pages/LogIn.svelte";
+  import Todos from "./Pages/Todos.svelte";
+  import TodoAdd from "./Pages/TodoAdd.svelte";
   import Header from "./Components/Header.svelte";
 </script>
 
@@ -19,6 +21,8 @@
     <Route path="helloworld" component={HelloWorld} />
     <Route path="registration" component={Registration} />
     <Route path="login" component={LogIn} />
+    <Route path="todo" component={Todos} />
+    <Route path="todo/add" component={TodoAdd} />
     <Route component={Error} />
   </div>
 </Router>
