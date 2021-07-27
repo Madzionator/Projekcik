@@ -1,9 +1,12 @@
 <script>
   export let todo;
+  export let onDeleteTodo;
+
   let datetime = new Date(todo.termin);
   let start = new Date();
   let diff = (datetime - start) / (1000 * 60 * 60 * 24);
   let b_color;
+
   if (diff < 0) b_color = "lightgrey";
   else if (diff <= 1) b_color = "darkorange";
   else if (diff <= 7) b_color = "gold";
@@ -15,6 +18,16 @@
   <div class="todo_date">
     <p>{datetime.toLocaleDateString()} o {datetime.toLocaleTimeString()}</p>
   </div>
+  {#if onDeleteTodo}
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      on:click={() => onDeleteTodo && onDeleteTodo()}
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Usuń">X</button
+    >
+  {/if}
 </div>
 
 <style>
@@ -22,7 +35,7 @@
     border: 2px solid black;
     height: 150px;
     width: 300px;
-    border-radius: 20px;
+    border-radius: 15px;
     margin: 8px;
   }
   .todo_title {
@@ -30,7 +43,7 @@
     background-color: skyblue;
     height: 50px;
     width: 255px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 8px;
     line-height: 50px;
     box-sizing: content-box;

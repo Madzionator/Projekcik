@@ -48,7 +48,7 @@ namespace Projekcik.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult CreateTodoItem(TodoDto item)
+        public IActionResult CreateTodoItem([FromBody] TodoDto item)
         {
             var user = _userInfo.GetCurrentUser();
 
@@ -75,6 +75,22 @@ namespace Projekcik.Api.Controllers
             toEdit.Title = item.Title;
             toEdit.Termin = item.Termin;
 
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var todo = _context.Todos.Find(id);
+            if (todo == null)
+                return NotFound();
+
+            var user = _userInfo.GetCurrentUser();
+            if (todo.User.Id != user.Id)
+                return BadRequest();
+
+            _context.Todos.Remove(todo);
             _context.SaveChanges();
             return NoContent();
         }

@@ -6,6 +6,7 @@
   let todos = [];
 
   onMount(async () => {
+    console.log("mounted!");
     Refresh();
   });
 
@@ -17,13 +18,23 @@
   function TodoAdd() {
     navigate("/todo/add", { replace: true });
   }
+
+  function onDeleteTodoXD(todoId) {
+    TodoService.deleteTodo(todoId)
+      .then((data) => {
+        Refresh();
+      })
+      .catch((response) => {
+        console.log(response);
+      });
+  }
 </script>
 
 <div class="container">
   <button class="dodaj" on:click={TodoAdd}> + dodaj zadanie </button>
   <div class="row">
     {#each todos as todo}
-      <TodoElement {todo} />
+      <TodoElement {todo} onDeleteTodo={() => onDeleteTodoXD(todo.id)} />
     {/each}
   </div>
 </div>

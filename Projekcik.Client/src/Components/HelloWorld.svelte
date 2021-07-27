@@ -9,7 +9,7 @@
     Refresh();
   });
 
-  async function handleClick() {
+  async function AddItem() {
     await HelloWorldService.postHelloWorld({ text: singleTxt });
     await Refresh();
   }
@@ -32,7 +32,7 @@
 <div>
   <input bind:value={singleTxt} type="text" />
 
-  <button on:click={handleClick}> wyślij </button>
+  <button on:click={AddItem}> wyślij </button>
 </div>
 
 {#each texts as t}
