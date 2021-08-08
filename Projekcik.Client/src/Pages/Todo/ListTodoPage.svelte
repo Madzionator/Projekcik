@@ -30,9 +30,11 @@
       .then((data) => {
         Refresh();
       })
-      .catch((response) => {
-        console.log(response);
-      });
+      .catch((response) => {});
+  }
+
+  function onEditTodo(todoId) {
+    navigate(`/todo/edit/${todoId}`, { replace: true });
   }
 </script>
 
@@ -44,7 +46,11 @@
   </div>
   <div class="row">
     {#each todos as todo}
-      <TodoItem {...todo} onDeleteTodo={() => onDeleteTodoXD(todo.id)} />
+      <TodoItem
+        {...todo}
+        onDeleteTodo={() => onDeleteTodoXD(todo.id)}
+        onEditTodo={() => onEditTodo(todo.id)}
+      />
     {/each}
 
     {#if loading}

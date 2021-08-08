@@ -2,6 +2,7 @@
   export let title;
   export let termin;
   export let onDeleteTodo;
+  export let onEditTodo;
 
   let start = new Date();
   let diff = (termin - start) / (1000 * 60 * 60 * 24);
@@ -29,6 +30,16 @@
         data-bs-toggle="tooltip"
         data-bs-placement="top"
         title="Usuń"><span class="fa fa-times" /></button
+      >
+    {/if}
+    {#if onEditTodo}
+      <button
+        type="button"
+        class="btn btn-outline-success todo_edit_button"
+        on:click={() => onEditTodo && onEditTodo()}
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Edytuj"><span class="fas fa-pen" /></button
       >
     {/if}
   </div>

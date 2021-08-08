@@ -10,6 +10,7 @@ using Projekcik.Database.Models;
 
 namespace Projekcik.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TodoController : ControllerBase
@@ -26,7 +27,6 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public IActionResult GetTodoList()
         {
             var todos = _context.Todos
@@ -48,7 +48,6 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public IActionResult GetTodo([FromRoute] int id)
         {
             var todo = _context.Todos
@@ -71,7 +70,6 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public IActionResult CreateTodoItem([FromBody] TodoDto item)
         {
             var user = _userInfo.GetCurrentUser();
@@ -79,7 +77,7 @@ namespace Projekcik.Api.Controllers
             _context.Todos.Add(new Todo
             {
                 Title = item.Title,
-                Termin = item.Termin,
+                Termin = item.Termin.LocalDateTime,
                 User = user
             });
             _context.SaveChanges();
@@ -89,15 +87,14 @@ namespace Projekcik.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
-        public IActionResult EditTodoItem(TodoDto item, int id)
+        public IActionResult EditTodoItem([FromBody] TodoDto item, [FromRoute] int id)
         {
             var toEdit = _context.Todos.Include(x => x.User).FirstOrDefault(x => x.Id == id);
             if (toEdit == null || toEdit.User.Id != _userInfo.Id)
                 return BadRequest();
 
             toEdit.Title = item.Title;
-            toEdit.Termin = item.Termin;
+            toEdit.Termin = item.Termin.LocalDateTime;
 
             _context.SaveChanges();
             return NoContent();
@@ -123,6 +120,7 @@ namespace Projekcik.Api.Controllers
     public class TodoDto
     {
         public string Title { get; set; }
-        public DateTime Termin { get; set; }
+        
+        public DateTimeOffset Termin { get; set; }
     }
 }
