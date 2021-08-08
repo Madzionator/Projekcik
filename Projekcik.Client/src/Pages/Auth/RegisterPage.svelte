@@ -1,6 +1,6 @@
 <script>
   import { Link } from "svelte-navigator";
-  import AuthService from "../Services/AuthService";
+  import AuthService from "../../Services/AuthService";
 
   let username = "";
   let password = "";

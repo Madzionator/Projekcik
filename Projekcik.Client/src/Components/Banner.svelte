@@ -12,9 +12,11 @@
       </p>
 
       <div class="guziczki">
-        <div class="guziczek" role="button"><Link to="witam">Witam</Link></div>
         <div class="guziczek" role="button">
-          <Link to="pozdrawiam">Pozdrawiam</Link>
+          <Link to="helloworld">Wpisy</Link>
+        </div>
+        <div class="guziczek" role="button">
+          <Link to="todo">Todosy</Link>
         </div>
       </div>
     </div>

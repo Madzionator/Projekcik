@@ -1,9 +1,9 @@
 <script>
+  import TodoItem from "./../../Components/TodoItem.svelte";
   import { onMount } from "svelte";
   import { navigate } from "svelte-navigator";
   import TimePicker from "svelte-time-picker";
-  import TodoService from "../Services/TodoService";
-  import TodoElement from "../Components/TodoElement.svelte";
+  import TodoService from "../../Services/TodoService";
 
   let title = "";
   let time = new Date();
@@ -25,6 +25,7 @@
   };
 
   function AddNewTodo() {
+    //this is so ugly
     let d = dateString.split("-");
     date = new Date(d[0], d[1], d[2], time.getHours(), time.getMinutes());
 
@@ -52,7 +53,7 @@
     <TimePicker date={now} on:change={changeTime} />
   </div>
 
-  <TodoElement todo={{ title: title, termin: date }} />
+  <TodoItem todo={{ title: title, termin: date }} />
 
   <button class="zapisz" on:click={AddNewTodo} disabled={title.length == 0}>
     zapisz zadanie

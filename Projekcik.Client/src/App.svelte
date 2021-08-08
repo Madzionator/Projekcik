@@ -1,28 +1,50 @@
 <script>
+  import RegisterPage from "./Pages/Auth/RegisterPage.svelte";
   import { Router, Link, Route } from "svelte-navigator";
-  import Home from "./Pages/Home.svelte";
-  import Witam from "./Pages/Witam.svelte";
-  import Pozdrawiam from "./Pages/Pozdrawiam.svelte";
-  import HelloWorld from "./Components/HelloWorld.svelte";
-  import Error from "./Pages/Error.svelte";
-  import Registration from "./Pages/Registration.svelte";
-  import LogIn from "./Pages/LogIn.svelte";
-  import Todos from "./Pages/Todos.svelte";
-  import TodoAdd from "./Pages/TodoAdd.svelte";
   import Header from "./Components/Header.svelte";
+  import ErrorPage from "./Pages/ErrorPage.svelte";
+  import HomePage from "./Pages/HomePage.svelte";
+  import HelloWorld from "./Components/HelloWorld.svelte";
+  import AddTodoPage from "./Pages/Todo/AddTodoPage.svelte";
+  import ListTodoPage from "./Pages/Todo/ListTodoPage.svelte";
+  import LoginPage from "./Pages/Auth/LoginPage.svelte";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
+
+  const routes = [
+    {
+      path: "/",
+      component: HomePage,
+    },
+    {
+      path: "helloworld",
+      component: HelloWorld,
+    },
+    {
+      path: "register",
+      component: RegisterPage,
+    },
+    {
+      path: "login",
+      component: LoginPage,
+    },
+    {
+      path: "todo",
+      component: ListTodoPage,
+    },
+    {
+      path: "todo/add",
+      component: AddTodoPage,
+    },
+  ];
 </script>
 
 <Router>
   <Header />
   <div>
-    <Route path="/" component={Home} />
-    <Route path="witam" component={Witam} />
-    <Route path="pozdrawiam" component={Pozdrawiam} />
-    <Route path="helloworld" component={HelloWorld} />
-    <Route path="registration" component={Registration} />
-    <Route path="login" component={LogIn} />
-    <Route path="todo" component={Todos} />
-    <Route path="todo/add" component={TodoAdd} />
-    <Route component={Error} />
+    {#each routes as route}
+      <Route {...route} />
+    {/each}
+    <Route component={ErrorPage} />
   </div>
 </Router>
+<SvelteToast />

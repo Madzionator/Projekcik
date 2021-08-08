@@ -33,6 +33,7 @@ namespace Projekcik.Api.Controllers
                 .Include(x => x.User)
                 .Include(x => x.Category)
                 .Where(x => x.User.Id == _userInfo.Id)
+                .OrderBy(x => x.Termin)
                 .ToList();
 
             return Ok(todos.Select(x =>
@@ -44,6 +45,29 @@ namespace Projekcik.Api.Controllers
                     x.Category
                 })
             );
+        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public IActionResult GetTodo([FromRoute] int id)
+        {
+            var todo = _context.Todos
+                .Include(x => x.User)
+                .Include(x => x.Category)
+                .FirstOrDefault(x => x.Id == id && x.User.Id == _userInfo.Id);
+
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new
+            {
+                todo.Id,
+                todo.Termin,
+                todo.Title,
+                todo.Category
+            });
         }
 
         [HttpPost]
@@ -60,7 +84,7 @@ namespace Projekcik.Api.Controllers
             });
             _context.SaveChanges();
 
-            _logger.LogInformation($"dodano przedmiot {item.Title}");
+            _logger.LogInformation($"Dodano przedmiot {item.Title}");
             return Ok();
         }
 
@@ -101,5 +125,4 @@ namespace Projekcik.Api.Controllers
         public string Title { get; set; }
         public DateTime Termin { get; set; }
     }
-
 }

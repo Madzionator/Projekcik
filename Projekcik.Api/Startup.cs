@@ -46,12 +46,6 @@ namespace Projekcik.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use((XD) =>
-            {
-
-                return XD.Invoke;
-            });
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

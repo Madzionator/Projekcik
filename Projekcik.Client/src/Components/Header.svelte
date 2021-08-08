@@ -8,10 +8,8 @@
       <p>Projekcik</p>
     </div>
     <Link to="/">Home</Link>
-    <Link to="witam">Witam</Link>
-    <Link to="pozdrawiam">Pozdrawiam</Link>
     <Link to="helloworld">HelloWorld</Link>
-    <Link to="registration">Registration</Link>
+    <Link to="register">Registration</Link>
     <Link to="login">Log In</Link>
     <Link to="todo">Todos</Link>
   </div>
@@ -27,5 +25,6 @@
 
   .header {
     border-bottom: 1px solid gray;
+    background-color: #eee;
   }
 </style>
