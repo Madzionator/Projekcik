@@ -1,5 +1,8 @@
 <script>
   import { Link } from "svelte-navigator";
+  import AuthService from "../Services/AuthService";
+
+  const isLogged = AuthService.isLogged();
 </script>
 
 <div class="header">
@@ -8,10 +11,12 @@
       <p>Projekcik</p>
     </div>
     <Link to="/">Home</Link>
-    <Link to="helloworld">HelloWorld</Link>
-    <Link to="register">Registration</Link>
-    <Link to="login">Log In</Link>
-    <Link to="todo">Todos</Link>
+    {#if isLogged}
+      <Link to="logout">Log Out</Link>
+    {:else}
+      <Link to="register">Register</Link>
+      <Link to="login">Log In</Link>
+    {/if}
   </div>
 </div>
 

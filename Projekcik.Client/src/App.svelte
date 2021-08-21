@@ -4,21 +4,16 @@
   import Header from "./Components/Header.svelte";
   import ErrorPage from "./Pages/ErrorPage.svelte";
   import HomePage from "./Pages/HomePage.svelte";
-  import HelloWorld from "./Components/HelloWorld.svelte";
-  import AddTodoPage from "./Pages/Todo/AddTodoPage.svelte";
-  import ListTodoPage from "./Pages/Todo/ListTodoPage.svelte";
   import LoginPage from "./Pages/Auth/LoginPage.svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
-  import EditTodoPage from "./Pages/Todo/EditTodoPage.svelte";
+  import LogoutPage from "./Pages/Auth/LogoutPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
-    { path: "helloworld", component: HelloWorld },
+    //auth
     { path: "register", component: RegisterPage },
     { path: "login", component: LoginPage },
-    { path: "todo", component: ListTodoPage },
-    { path: "todo/add", component: AddTodoPage },
-    { path: "todo/edit/:id", component: EditTodoPage },
+    { path: "logout", component: LogoutPage },
   ];
 </script>
 

@@ -14,6 +14,7 @@ namespace Projekcik.Core
             services.AddScoped<IHashService, HashService>();
             services.AddScoped<ITokenManager, TokenManager>();
             services.AddTransient<IUserInfo, UserInfo>();
+            services.AddTransient<IUserService, UserService>();
 
             return services;
         }

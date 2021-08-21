@@ -17,7 +17,7 @@ namespace Projekcik.Api
             using (var scope = host.Services.CreateScope())
             {
                 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Startup>>();
-                var context = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
+                var context = scope.ServiceProvider.GetRequiredService<DataContext>();
 
                 logger.LogInformation("Updating database");
                 

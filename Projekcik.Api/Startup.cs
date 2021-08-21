@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Reflection;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Projekcik.Api.Controllers;
 using Projekcik.Core;
-
 
 namespace Projekcik.Api
 {
@@ -42,6 +41,8 @@ namespace Projekcik.Api
                 logging.AddDebug();
                 logging.AddAzureWebAppDiagnostics();
             });
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,12 +55,12 @@ namespace Projekcik.Api
             }
 
             app.UseHttpsRedirection();
-           
+            app.UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

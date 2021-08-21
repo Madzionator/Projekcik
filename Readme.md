@@ -5,4 +5,4 @@ Projekcik
 For database operations please use eg. Visual Studio's Package Manager Console
 
 Creating migrations: `Add-Migration {name}`
-Updating database: `Update-database`
+Database will update itself when running the api
