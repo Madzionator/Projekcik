@@ -41,20 +41,20 @@
     </div>
     <div class="pola">
       <div class="form-group">
-        <label for="exampleInputLogin1">Login</label>
+        <label for="InputLogin1">Login</label>
         <input
           bind:value={username}
           class="form-control"
-          id="exampleInputLogin1"
+          id="InputLogin1"
           placeholder="Twój login"
         />
         <p />
-        <label for="exampleInputPassword1">Hasło</label>
+        <label for="InputPassword1">Hasło</label>
         <input
           type="password"
           bind:value={password}
           class="form-control"
-          id="exampleInputPassword1"
+          id="InputPassword1"
           placeholder="Twoje hasło"
         />
       </div>
