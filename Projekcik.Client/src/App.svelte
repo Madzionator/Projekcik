@@ -7,6 +7,7 @@
   import LoginPage from "./Pages/Auth/LoginPage.svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import LogoutPage from "./Pages/Auth/LogoutPage.svelte";
+  import ManagePage from "./Pages/ManagePage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
@@ -14,6 +15,7 @@
     { path: "register", component: RegisterPage },
     { path: "login", component: LoginPage },
     { path: "logout", component: LogoutPage },
+    { path: "manage", component: ManagePage },
   ];
 </script>
 

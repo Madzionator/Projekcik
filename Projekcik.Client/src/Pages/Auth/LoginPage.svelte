@@ -2,6 +2,7 @@
   import { navigate } from "svelte-navigator";
   import AuthService from "../../Services/AuthService";
   import { toast } from "@zerodevx/svelte-toast";
+  let logo = "./images/logo.png";
 
   let username = "";
   let password = "";
@@ -24,34 +25,82 @@
   }
 </script>
 
-<div class="container">
-  <h4>Sign in</h4>
+<head>
+  <style>
+    body {
+      background-color: #eee;
+    }
+  </style>
+</head>
 
-  <div class="row">
-    <div class="col-4"><p>Username</p></div>
-    <div class="col-8"><input bind:value={username} type="text" /></div>
-
-    <div class="col-4"><p>Password</p></div>
-    <div class="col-8"><input bind:value={password} type="text" /></div>
-  </div>
-
-  <div>
-    <button
-      on:click={LogIn}
-      disabled={username.length == 0 || password.length == 0}
-      >Log in
-    </button>
-  </div>
-
-  {#if busy}
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
+<body>
+  <div class="container prostokat">
+    <img src={logo} alt="logo" width="60%" />
+    <div class="napis">
+      <p>Panel administracyjny</p>
     </div>
-  {/if}
+    <div class="pola">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Login</label>
+        <input
+          bind:value={username}
+          class="form-control"
+          placeholder="Twój login"
+        />
+        <p />
+        <label for="exampleInputEmail1">Hasło</label>
+        <input
+          bind:value={password}
+          class="form-control"
+          placeholder="Twoje hasło"
+        />
+      </div>
+    </div>
 
-  {#if errorMessage}
     <div>
-      <p>login lub hasło niepoprawne</p>
+      <button
+        type="button"
+        class="btn btn-success mt-4"
+        on:click={LogIn}
+        disabled={username.length == 0 || password.length == 0}
+        >Zaloguj
+      </button>
     </div>
-  {/if}
-</div>
+
+    {#if busy}
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    {/if}
+
+    {#if errorMessage}
+      <div>
+        <p>login lub hasło niepoprawne</p>
+      </div>
+    {/if}
+  </div>
+</body>
+
+<style>
+  .prostokat {
+    padding: 50px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+  }
+  .napis {
+    font-weight: 500;
+    padding: 10px;
+  }
+  .pola {
+    margin: auto;
+    max-width: 400px;
+  }
+  .btn-success {
+    width: 50%;
+    border-radius: 5px;
+  }
+</style>
