@@ -19,13 +19,13 @@
       <p>Panel administracyjny</p>
     </div>
     <div>
-      <Link to="/manage/trades">
+      <Link to="/manage/jobs">
         <div class="btn pole btn-outline-secondary">
           <i class="fas fa-briefcase ikonka m-2" /><br />Oferty
         </div>
       </Link>
 
-      <Link to="/manage/users">
+      <Link to="/manage/candidates">
         <div class="btn pole btn-outline-secondary">
           <i class="fas fa-user ikonka m-2" /><br />Kandydaci
         </div>
@@ -69,7 +69,6 @@
   .pole {
     padding: 10px;
     width: 150px;
-    /* height: 76px; */
     border-bottom-width: 2px;
     background-color: rgb(217, 180, 146);
     color: white;

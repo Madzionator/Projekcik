@@ -41,17 +41,20 @@
     </div>
     <div class="pola">
       <div class="form-group">
-        <label for="exampleInputEmail1">Login</label>
+        <label for="exampleInputLogin1">Login</label>
         <input
           bind:value={username}
           class="form-control"
+          id="exampleInputLogin1"
           placeholder="Twój login"
         />
         <p />
-        <label for="exampleInputEmail1">Hasło</label>
+        <label for="exampleInputPassword1">Hasło</label>
         <input
+          type="password"
           bind:value={password}
           class="form-control"
+          id="exampleInputPassword1"
           placeholder="Twoje hasło"
         />
       </div>
@@ -59,7 +62,6 @@
 
     <div>
       <button
-        type="button"
         class="btn btn-success mt-4"
         on:click={LogIn}
         disabled={username.length == 0 || password.length == 0}
