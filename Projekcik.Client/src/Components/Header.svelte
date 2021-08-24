@@ -11,6 +11,7 @@
       <p>Projekcik</p>
     </div>
     <Link to="/">Home</Link>
+    <Link to="manage">Manage</Link>
     {#if isLogged}
       <Link to="logout">Log Out</Link>
     {:else}

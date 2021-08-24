@@ -8,6 +8,8 @@
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import LogoutPage from "./Pages/Auth/LogoutPage.svelte";
   import ManagePage from "./Pages/ManagePage.svelte";
+  import AuthService from "./Services/AuthService";
+  import ProtectedRoute from "./Components/ProtectedRoute.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
@@ -15,8 +17,9 @@
     { path: "register", component: RegisterPage },
     { path: "login", component: LoginPage },
     { path: "logout", component: LogoutPage },
-    { path: "manage", component: ManagePage },
   ];
+
+  const protectedRoutes = [{ path: "manage", component: ManagePage }];
 </script>
 
 <Router>
@@ -24,6 +27,10 @@
   <div>
     {#each routes as route}
       <Route {...route} />
+    {/each}
+
+    {#each protectedRoutes as protectedRoute}
+      <ProtectedRoute routeParams={protectedRoute} />
     {/each}
     <Route component={ErrorPage} />
   </div>
