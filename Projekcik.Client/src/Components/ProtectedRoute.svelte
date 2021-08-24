@@ -1,15 +1,15 @@
 <script>
+  import AccessDeniedPage from "./../Pages/Auth/AccessDeniedPage.svelte";
   import { Route } from "svelte-navigator";
-  import AuthService from "../Services/AuthService";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { navigate } from "svelte-navigator";
+  import { token } from "../stores";
 
-  if (!AuthService.isLogged()) {
-    toast.push("Musisz się zalogować");
-    navigate("/login", { replace: true });
-  }
+  $: isAuthenticated = $token;
 
   export let routeParams;
 </script>
 
-<Route {...routeParams} />
+{#if isAuthenticated}
+  <Route {...routeParams} />
+{:else}
+  <Route {...{ ...routeParams, component: AccessDeniedPage }} />
+{/if}
