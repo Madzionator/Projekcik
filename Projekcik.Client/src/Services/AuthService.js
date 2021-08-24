@@ -3,7 +3,7 @@ import Api from "./Api";
 const authTokenKey = "auth_token";
 
 export default {
-  register: (login, password) => Api.post("/uer/create", { login, password }),
+  register: (login, password) => Api.post("/user/create", { login, password }),
   login: (login, password) =>
     Api.post("/user/login", { login, password }).then((response) => {
       const token = response;
