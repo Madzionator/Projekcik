@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   .prostokat {
     padding: 50px;
     background-color: white;
