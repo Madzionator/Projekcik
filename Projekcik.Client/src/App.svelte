@@ -3,15 +3,18 @@
   import { Router, Link, Route } from "svelte-navigator";
   import Header from "./Components/Header.svelte";
   import ErrorPage from "./Pages/ErrorPage.svelte";
-  import HomePage from "./Pages/HomePage.svelte";
   import LoginPage from "./Pages/Auth/LoginPage.svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import LogoutPage from "./Pages/Auth/LogoutPage.svelte";
   import ManagePage from "./Pages/ManagePage.svelte";
   import ProtectedRoute from "./Components/ProtectedRoute.svelte";
+  import AboutPage from "./Pages/AboutPage.svelte";
+  import HomePage from "./Pages/HomePage.svelte";
+  import Footer from "./Components/Footer.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
+    { path: "about", component: AboutPage },
     //auth
     { path: "register", component: RegisterPage },
     { path: "login", component: LoginPage },
@@ -36,9 +39,19 @@
       {/each}
       <Route component={ErrorPage} />
     </div>
+    <div class="footer">
+      <Footer />
+    </div>
   </div>
 </Router>
-<SvelteToast />
+<SvelteToast
+  options={{
+    theme: {
+      "--toastBackground": "#48BB78",
+      "--toastProgressBackground": "#2F855A",
+    },
+  }}
+/>
 
 <style>
   .main {

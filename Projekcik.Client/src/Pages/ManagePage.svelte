@@ -12,7 +12,7 @@
   </style>
 </head>
 
-<div class=" prostokat">
+<div class="container prostokat p-3 p-lg-5 mx-auto my-5">
   <img src={logo} alt="logo" class="logo" />
 
   <hr />
@@ -54,12 +54,9 @@
 
 <style lang="scss">
   .prostokat {
-    padding: 50px;
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
-    margin: auto;
-    max-width: 1200px;
     text-align: center;
     border-bottom-width: 2px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
@@ -67,6 +64,7 @@
 
   .logo {
     max-width: 500px;
+    width: 100%;
   }
 
   .ikonka {
@@ -74,6 +72,7 @@
   }
 
   .pole {
+    margin: 5px;
     padding: 10px;
     width: 150px;
     border-bottom-width: 2px;

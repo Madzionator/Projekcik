@@ -11,15 +11,10 @@
     { content: "😽" },
     { content: "🐗" },
     { content: "❤" },
-    { content: "where" },
-    { content: "teleport" },
-    { content: "*(>^.^)>" },
-    { content: "<(^.^<)*" },
   ];
 </script>
 
 <Banner />
-<h3 class="text-center">Najnowsze oferty pracy</h3>
 <div class="container prostokaciki">
   <div class="row">
     {#each tx as t}
@@ -30,7 +25,8 @@
   </div>
 </div>
 
-<div class="p-5" />
-
-<style lang="scss">
+<style>
+  .prostokaciki > .row > [class*="col-"] {
+    padding: 0;
+  }
 </style>
