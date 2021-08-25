@@ -1,8 +1,8 @@
 <script>
   import { Link } from "svelte-navigator";
-  import AuthService from "../Services/AuthService";
+  import { token } from "../stores";
 
-  const isLogged = AuthService.isLogged();
+  $: isAuthenticated = $token;
 </script>
 
 <div class="header">
@@ -11,13 +11,17 @@
       <p>Projekcik</p>
     </div>
     <Link to="/">Home</Link>
-    <Link to="manage">Manage</Link>
-    {#if isLogged}
-      <Link to="logout">Log Out</Link>
-    {:else}
-      <Link to="register">Register</Link>
-      <Link to="login">Log In</Link>
-    {/if}
+    <Link to="manage">Zarządzaj</Link>
+
+    <div class="xd" style="display: inline; float: right">
+      {#if isAuthenticated}
+        Zalogowano
+        <Link to="logout">Wyloguj</Link>
+      {:else}
+        <Link to="register">Zarejestruj</Link>
+        <Link to="login">Zaloguj</Link>
+      {/if}
+    </div>
   </div>
 </div>
 
@@ -26,7 +30,6 @@
     text-align: left;
     font-size: 24px;
     font-weight: bold;
-    margin-top: 5px;
   }
 
   .header {
