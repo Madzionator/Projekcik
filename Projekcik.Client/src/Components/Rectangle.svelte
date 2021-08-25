@@ -9,7 +9,7 @@
 <style>
   .rectangle {
     border: 2px solid black;
-    height: 100px;
+    height: 120px;
     margin: 5px;
     line-height: 100px;
     box-sizing: content-box;
