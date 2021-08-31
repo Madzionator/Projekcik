@@ -7,6 +7,7 @@ namespace Projekcik.Database
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)

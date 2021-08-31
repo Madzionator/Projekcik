@@ -9,6 +9,7 @@ namespace Projekcik.Api.Models
         public MapperConfiguration()
         {
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Location, LocationDto>().ReverseMap();
         }
     }
 }

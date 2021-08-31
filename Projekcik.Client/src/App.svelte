@@ -6,11 +6,12 @@
   import LoginPage from "./Pages/Auth/LoginPage.svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import LogoutPage from "./Pages/Auth/LogoutPage.svelte";
-  import ManagePage from "./Pages/ManagePage.svelte";
+  import ManagePage from "./Pages/Manage/ManagePage.svelte";
   import ProtectedRoute from "./Components/ProtectedRoute.svelte";
   import AboutPage from "./Pages/AboutPage.svelte";
   import HomePage from "./Pages/HomePage.svelte";
   import Footer from "./Components/Footer.svelte";
+  import LocationPage from "./Pages/Manage/LocationPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
@@ -21,7 +22,10 @@
     { path: "logout", component: LogoutPage },
   ];
 
-  const protectedRoutes = [{ path: "manage", component: ManagePage }];
+  const protectedRoutes = [
+    { path: "manage", component: ManagePage },
+    { path: "manage/locations", component: LocationPage },
+  ];
 </script>
 
 <Router>
