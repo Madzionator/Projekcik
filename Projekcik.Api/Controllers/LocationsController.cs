@@ -18,6 +18,9 @@ namespace Projekcik.Api.Controllers
         private readonly DataContext _context;
         private readonly IMapper _mapper;
 
+        private const string ErrorMessage_CreateLoc = "Nie udało się dodać lokalizacji";
+        private const string ErrorMessage_EditLoc = "Nie udało się edytować lokalizacji";
+
         public LocationsController(DataContext context, IMapper mapper)
         {
             _context = context;
@@ -32,9 +35,8 @@ namespace Projekcik.Api.Controllers
             return Ok(locations);
         }
 
-
         [HttpPost]
-        public IActionResult CreateLocation(LocationDto locationDto)
+        public IActionResult CreateLocation([FromBody] LocationDto locationDto)
         {
             if (!ModelState.IsValid)
             {
@@ -49,14 +51,14 @@ namespace Projekcik.Api.Controllers
             }
             catch (Exception ex)
             {
-                return Error("Nie udało się dodać lokalizacji");
+                return Error(ErrorMessage_CreateLoc);
             }
 
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public IActionResult EditLocation(LocationDto locationDto, int id)
+        public IActionResult EditLocation([FromBody] LocationDto locationDto, [FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +74,7 @@ namespace Projekcik.Api.Controllers
             }
             catch (Exception ex)
             {
-                return Error("Nie udało się edytować lokalizacji");
+                return Error(ErrorMessage_EditLoc);
             }
 
             return Ok();
