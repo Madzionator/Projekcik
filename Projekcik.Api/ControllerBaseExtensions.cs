@@ -9,6 +9,7 @@ namespace Projekcik.Api
 
     public class MyController : ControllerBase
     {
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Error(string message)
         {
             return BadRequest(new ErrorMessageResult
