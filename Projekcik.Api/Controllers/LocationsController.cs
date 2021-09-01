@@ -20,6 +20,7 @@ namespace Projekcik.Api.Controllers
 
         private const string ErrorMessage_CreateLoc = "Nie udało się dodać lokalizacji";
         private const string ErrorMessage_EditLoc = "Nie udało się edytować lokalizacji";
+        private const string ErrorMessage_ProtectedValue = "Nie można edytować tej lokalizacji";
 
         public LocationsController(DataContext context, IMapper mapper)
         {
@@ -60,6 +61,9 @@ namespace Projekcik.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult EditLocation([FromBody] LocationDto locationDto, [FromRoute] int id)
         {
+            if (id < 0)
+                return Error(ErrorMessage_ProtectedValue);
+
             if (!ModelState.IsValid)
             {
                 return ValidationProblem();

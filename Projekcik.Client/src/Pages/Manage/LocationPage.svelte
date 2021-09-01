@@ -11,15 +11,13 @@
 
   function Refresh() {
     LocationService.getLocationsList().then((response) => {
-      locations = response;
-
-      locations = locations
-        .slice(0, 1)
-        .concat(
-          locations
-            .slice(1, locations.length)
-            .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
-        );
+      let top = response
+        .filter((x) => x.id < 0)
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+      let rest = response
+        .filter((x) => x.id >= 0)
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+      locations = top.concat(rest);
     });
   }
 
@@ -66,14 +64,18 @@
           <td>cos bedzie</td>
           <td>tu też</td>
           <td>
-            <button class="btn" on:click={() => LocationEdit(loc)}>
-              <span class="fa fa-edit" aria-hidden="true" />
-            </button>
+            {#if loc.id >= 0}
+              <button class="btn" on:click={() => LocationEdit(loc)}>
+                <span class="fa fa-edit" aria-hidden="true" />
+              </button>
+            {/if}
           </td>
           <td>
-            <button class="btn" on:click={() => LocationDelete(loc.id)}>
-              <span class="fa fa-times" aria-hidden="true" />
-            </button>
+            {#if loc.id >= 0}
+              <button class="btn" on:click={() => LocationDelete(loc.id)}>
+                <span class="fa fa-times" aria-hidden="true" />
+              </button>
+            {/if}
           </td>
         </tr>
       {/each}
