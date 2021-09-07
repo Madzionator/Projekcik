@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Projekcik.Api.Controllers
+namespace Projekcik.Api.Models
 {
     public class LocationDto
     {

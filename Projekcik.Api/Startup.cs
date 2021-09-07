@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Projekcik.Api.Controllers;
+using Projekcik.Api.Models;
 using Projekcik.Core;
 
 namespace Projekcik.Api

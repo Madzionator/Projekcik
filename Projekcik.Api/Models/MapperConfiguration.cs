@@ -10,6 +10,8 @@ namespace Projekcik.Api.Models
         {
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Location, LocationDto>().ReverseMap();
+            CreateMap<Job, JobDto>().ReverseMap();
+            CreateMap<Job, JobEditDto>().ReverseMap();
         }
     }
 }
