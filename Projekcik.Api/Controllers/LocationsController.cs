@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Projekcik.Api.Models;
 using Projekcik.Core.Services;
 using Projekcik.Database;
 using Projekcik.Database.Models;
@@ -71,7 +72,10 @@ namespace Projekcik.Api.Controllers
 
             try
             {
-                Location location = _context.Locations.Find(id);
+                var location = _context.Locations.Find(id);
+                if (location is null)
+                    throw new Exception("location not found");
+
                 location = _mapper.Map(locationDto, location);
                 _context.Locations.Update(location);
                 _context.SaveChanges();

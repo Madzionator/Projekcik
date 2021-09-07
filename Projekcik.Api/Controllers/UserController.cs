@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Projekcik.Api.Models;
 using Projekcik.Core.Services;
 using Projekcik.Database.Models;
 
