@@ -8,7 +8,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <Link class="navbar-brand py-0" to="/">
-      <img class="logo" src="./images/logo.png" alt="logo" />
+      <img class="logo" src="/images/logo.png" alt="logo" />
     </Link>
     <button
       class="navbar-toggler"

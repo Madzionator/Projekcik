@@ -3,7 +3,7 @@
   import AuthService from "../../Services/AuthService";
   import { toast } from "@zerodevx/svelte-toast";
   import qs from "query-string";
-  let logo = "./images/logo.png";
+  let logo = "/images/logo.png";
 
   let username = "";
   let password = "";
