@@ -38,11 +38,11 @@
             </p>
             {#if isAuthenticated}
               <p>
-                <Link to="/logout" class="text-reset">Wyloguj</Link>
+                <Link to="/auth/logout" class="text-reset">Wyloguj</Link>
               </p>
             {:else}
               <p>
-                <Link to="/login" class="text-reset">Zaloguj</Link>
+                <Link to="/auth/login" class="text-reset">Zaloguj</Link>
               </p>
             {/if}
           </div>

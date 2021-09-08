@@ -35,7 +35,9 @@
           <Link to="/manage" class="btn btn-outline-success mx-3"
             >Zarządzaj</Link
           >
-          <Link to="/logout" class="btn btn-outline-success">Wyloguj się</Link>
+          <Link to="/auth/logout" class="btn btn-outline-success"
+            >Wyloguj się</Link
+          >
         {:else}
           <Link to="/manage" class="btn btn-outline-success">Zaloguj się</Link>
         {/if}

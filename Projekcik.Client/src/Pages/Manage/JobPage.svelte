@@ -92,6 +92,7 @@
     font-size: large;
     text-align: center;
     border: 1px solid black;
+    border-radius: 5px;
     background-color: rgba(76, 145, 94, 0.5);
   }
   .tabela {

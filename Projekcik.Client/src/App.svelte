@@ -1,33 +1,22 @@
 <script>
-  import RegisterPage from "./Pages/Auth/RegisterPage.svelte";
+  import _Auth from "./Pages/Auth/_Auth.svelte";
+  import _Manage from "./Pages/Manage/_Manage.svelte";
   import { Router, Link, Route } from "svelte-navigator";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
   import Header from "./Components/Header.svelte";
   import ErrorPage from "./Pages/ErrorPage.svelte";
-  import LoginPage from "./Pages/Auth/LoginPage.svelte";
-  import { SvelteToast } from "@zerodevx/svelte-toast";
-  import LogoutPage from "./Pages/Auth/LogoutPage.svelte";
-  import ManagePage from "./Pages/Manage/ManagePage.svelte";
   import ProtectedRoute from "./Components/ProtectedRoute.svelte";
   import AboutPage from "./Pages/AboutPage.svelte";
   import HomePage from "./Pages/HomePage.svelte";
   import Footer from "./Components/Footer.svelte";
-  import LocationPage from "./Pages/Manage/LocationPage.svelte";
-  import JobPage from "./Pages/Manage/JobPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
     { path: "about", component: AboutPage },
-    //auth
-    { path: "register", component: RegisterPage },
-    { path: "login", component: LoginPage },
-    { path: "logout", component: LogoutPage },
+    { path: "auth/*", component: _Auth },
   ];
 
-  const protectedRoutes = [
-    { path: "manage", component: ManagePage },
-    { path: "manage/locations", component: LocationPage },
-    { path: "manage/jobs", component: JobPage },
-  ];
+  const protectedRoutes = [{ path: "manage/*", component: _Manage }];
 </script>
 
 <Router>
