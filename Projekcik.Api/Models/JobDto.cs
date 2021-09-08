@@ -24,6 +24,14 @@ namespace Projekcik.Api.Models
             RuleFor(job => job.Title).MinimumLength(5).MaximumLength(100);
             RuleFor(job => job.Description).MinimumLength(20).MaximumLength(4096);
             RuleFor(job => job.CompanyName).MaximumLength(100).NotEmpty();
+
+            RuleFor(job => job.MaximumSalary)
+                .GreaterThanOrEqualTo(0)
+                .GreaterThanOrEqualTo(job => job.MinimumSalary).When(job => job.MinimumSalary != null, ApplyConditionTo.CurrentValidator);
+
+            RuleFor(job => job.MinimumSalary)
+                .GreaterThanOrEqualTo(0)
+                .LessThanOrEqualTo(job => job.MaximumSalary).When(job => job.MaximumSalary  != null, ApplyConditionTo.CurrentValidator);
         }
     }
 }
