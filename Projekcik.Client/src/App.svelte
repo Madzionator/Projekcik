@@ -12,6 +12,7 @@
   import HomePage from "./Pages/HomePage.svelte";
   import Footer from "./Components/Footer.svelte";
   import LocationPage from "./Pages/Manage/LocationPage.svelte";
+  import JobPage from "./Pages/Manage/JobPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
@@ -25,6 +26,7 @@
   const protectedRoutes = [
     { path: "manage", component: ManagePage },
     { path: "manage/locations", component: LocationPage },
+    { path: "manage/jobs", component: JobPage },
   ];
 </script>
 

@@ -31,7 +31,7 @@ namespace Projekcik.Api.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult GetList()
+        public IActionResult GetJobsList()
         {
             var jobs = _context.Jobs.ToList();
             var jobdtos = _mapper.Map<List<JobDto>>(jobs);
