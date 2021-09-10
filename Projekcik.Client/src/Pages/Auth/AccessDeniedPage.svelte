@@ -7,7 +7,7 @@
   queryparams["href"] = window.location.href;
   const queryParams2 = qs.stringify(queryparams);
 
-  const loginUrl = "/login";
+  const loginUrl = "/auth/login";
   const redirectUrl = `${loginUrl}?${queryParams2}`;
   navigate(redirectUrl, { replace: true });
   toast.push("Wymagane logowanie");

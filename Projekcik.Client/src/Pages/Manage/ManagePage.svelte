@@ -1,7 +1,7 @@
 <script>
   import { Link } from "svelte-navigator";
 
-  let logo = "./images/logo.png";
+  let logo = "/images/logo.png";
 </script>
 
 <head>

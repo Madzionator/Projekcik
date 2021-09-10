@@ -12,7 +12,7 @@
         <div class="row mt-3">
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <h6 class="text-uppercase fw-bold mb-4">
-              <img src="./images/logo.png" class="logo" />
+              <img src="/images/logo.png" class="logo" alt="logo" />
             </h6>
             <p>
               Here you can use rows and columns to organize your footer content.
@@ -38,11 +38,11 @@
             </p>
             {#if isAuthenticated}
               <p>
-                <Link to="/logout" class="text-reset">Wyloguj</Link>
+                <Link to="/auth/logout" class="text-reset">Wyloguj</Link>
               </p>
             {:else}
               <p>
-                <Link to="/login" class="text-reset">Zaloguj</Link>
+                <Link to="/auth/login" class="text-reset">Zaloguj</Link>
               </p>
             {/if}
           </div>

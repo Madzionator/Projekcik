@@ -55,7 +55,9 @@
 
   {#if signedUp}
     <p>
-      rejestracja poprawna, proszę się zalogować:<Link to="/login">Log In</Link>
+      rejestracja poprawna, proszę się zalogować:<Link to="/auth/login"
+        >Log In</Link
+      >
     </p>
   {/if}
 </div>

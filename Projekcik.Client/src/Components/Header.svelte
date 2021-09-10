@@ -8,7 +8,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <Link class="navbar-brand py-0" to="/">
-      <img class="logo" src="./images/logo.png" alt="logo" />
+      <img class="logo" src="/images/logo.png" alt="logo" />
     </Link>
     <button
       class="navbar-toggler"
@@ -35,7 +35,9 @@
           <Link to="/manage" class="btn btn-outline-success mx-3"
             >Zarządzaj</Link
           >
-          <Link to="/logout" class="btn btn-outline-success">Wyloguj się</Link>
+          <Link to="/auth/logout" class="btn btn-outline-success"
+            >Wyloguj się</Link
+          >
         {:else}
           <Link to="/manage" class="btn btn-outline-success">Zaloguj się</Link>
         {/if}
