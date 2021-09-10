@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Projekcik.Api.Models;
+using Projekcik.Core.DTO;
 using Projekcik.Core.Services;
-using Projekcik.Database;
-using Projekcik.Database.Models;
+using Projekcik.Infrastructure.Api;
 
 namespace Projekcik.Api.Controllers
 {
@@ -16,76 +12,36 @@ namespace Projekcik.Api.Controllers
     [Route("[controller]")]
     public class LocationsController : MyController
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
+        private readonly ILocationService _locationService;
 
-        private const string ErrorMessage_CreateLoc = "Nie udało się dodać lokalizacji";
-        private const string ErrorMessage_EditLoc = "Nie udało się edytować lokalizacji";
-        private const string ErrorMessage_ProtectedValue = "Nie można edytować tej lokalizacji";
-
-        public LocationsController(DataContext context, IMapper mapper)
+        public LocationsController(ILocationService locationService)
         {
-            _context = context;
-            _mapper = mapper;
+            _locationService = locationService;
         }
 
         [AllowAnonymous]
         [HttpGet]
+        [ProducesResponseType(typeof(LocationDto[]), StatusCodes.Status200OK)]
         public IActionResult GetList()
         {
-            var locations = _context.Locations.ToList();
+            var locations = _locationService.Browse();
             return Ok(locations);
         }
 
         [HttpPost]
-        public IActionResult CreateLocation([FromBody] LocationDto locationDto)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult CreateLocation([FromBody] LocationEditDto locationDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return ValidationProblem();
-            }
-
-            try
-            {
-                var location = _mapper.Map<Location>(locationDto);
-                _context.Locations.Add(location);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return Error(ErrorMessage_CreateLoc);
-            }
-
-            return Ok();
+            _locationService.Create(locationDto);
+            return NoContent();
         }
 
         [HttpPut("{id}")]
-        public IActionResult EditLocation([FromBody] LocationDto locationDto, [FromRoute] int id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult EditLocation([FromRoute] int id, [FromBody] LocationEditDto locationDto)
         {
-            if (id < 0)
-                return Error(ErrorMessage_ProtectedValue);
-
-            if (!ModelState.IsValid)
-            {
-                return ValidationProblem();
-            }
-
-            try
-            {
-                var location = _context.Locations.Find(id);
-                if (location is null)
-                    throw new Exception("location not found");
-
-                location = _mapper.Map(locationDto, location);
-                _context.Locations.Update(location);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return Error(ErrorMessage_EditLoc);
-            }
-
-            return Ok();
+            _locationService.Edit(id, locationDto);
+            return NoContent();
         }
     }
 }

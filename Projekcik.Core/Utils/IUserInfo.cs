@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Projekcik.Core.Exceptions;
 using Projekcik.Database;
 using Projekcik.Database.Models;
 
-namespace Projekcik.Core.Services
+namespace Projekcik.Core.Utils
 {
     public interface IUserInfo
     {
@@ -38,7 +38,7 @@ namespace Projekcik.Core.Services
             var user = _context.Users.Find(Id);
             if (user == null)
             {
-                throw new AuthenticationException();
+                throw new UserNotFoundException("");
             }
             return user;
         }

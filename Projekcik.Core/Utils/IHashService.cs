@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Projekcik.Core.Services
+namespace Projekcik.Core.Utils
 {
     public interface IHashService
     {

@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projekcik.Database", "Proje
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projekcik.Core", "Projekcik.Core\Projekcik.Core.csproj", "{D4051448-5FF4-418A-B70A-59681E59BF9B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projekcik.Infrastructure", "Projekcik.Infrastructure\Projekcik.Infrastructure.csproj", "{2F15F87D-F442-44ED-9FB2-ED3A1DE80EBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{BA4BD42D-C578-4811-BEAB-8E9C0FE63AD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{68321663-0A21-4015-AF26-ECB97A44D9DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +33,19 @@ Global
 		{D4051448-5FF4-418A-B70A-59681E59BF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4051448-5FF4-418A-B70A-59681E59BF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4051448-5FF4-418A-B70A-59681E59BF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F15F87D-F442-44ED-9FB2-ED3A1DE80EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F15F87D-F442-44ED-9FB2-ED3A1DE80EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F15F87D-F442-44ED-9FB2-ED3A1DE80EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F15F87D-F442-44ED-9FB2-ED3A1DE80EBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA3622B6-C132-4C35-B0FD-DB912DC9DEF3} = {68321663-0A21-4015-AF26-ECB97A44D9DE}
+		{4DAE5458-9695-4E62-8F86-31D72DB04FC4} = {68321663-0A21-4015-AF26-ECB97A44D9DE}
+		{D4051448-5FF4-418A-B70A-59681E59BF9B} = {68321663-0A21-4015-AF26-ECB97A44D9DE}
+		{2F15F87D-F442-44ED-9FB2-ED3A1DE80EBB} = {BA4BD42D-C578-4811-BEAB-8E9C0FE63AD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75840720-2C19-4757-98AE-911A34DAA338}
