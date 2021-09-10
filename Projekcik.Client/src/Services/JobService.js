@@ -3,8 +3,9 @@ import Api from "./Api";
 export default {
   getJobsList: () => Api.get("/job"),
 
-  // todo:
-  // createJob: (name) => Api.post("/job", { name }),
+  getJob: (id) => Api.get(`/job/${id}`),
 
-  // editJob: (id, name) => Api.put(`/job/${id}`, { name }),
+  createJob: (job) => Api.post("/job", job),
+
+  editJob: (id, job) => Api.put(`/job/${id}`, job),
 };
