@@ -13,6 +13,8 @@
   import Footer from "./Components/Footer.svelte";
   import LocationPage from "./Pages/Manage/LocationPage.svelte";
   import JobPage from "./Pages/Manage/JobPage.svelte";
+  import JobAddPage from "./Pages/Manage/JobAddPage.svelte";
+  import JobEditPage from "./Pages/Manage/JobEditPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
@@ -27,6 +29,8 @@
     { path: "manage", component: ManagePage },
     { path: "manage/locations", component: LocationPage },
     { path: "manage/jobs", component: JobPage },
+    { path: "manage/jobs/add", component: JobAddPage },
+    { path: "manage/jobs/edit/:id", component: JobEditPage },
   ];
 </script>
 
