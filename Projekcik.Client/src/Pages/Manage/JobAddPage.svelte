@@ -17,7 +17,6 @@
       })
       .catch((x) => {
         errors = x.response.data.errors;
-        console.log(errors);
         toast.push("Nie udało się dodać oferty 😿");
       });
   }}

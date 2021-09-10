@@ -4,7 +4,7 @@
   export let minimumSalary;
   export let maximumSalary;
   export let companyName;
-  export let onEdit = false;
+  export let isEdit = false;
 
   export let validationErrors = {};
   export let onSave;
@@ -23,7 +23,7 @@
 <div class="container prostokat p-3 p-lg-5 mx-auto my-5">
   <div class="mb-3">
     <div class="title">
-      {#if onEdit}
+      {#if isEdit}
         <i class="fas fa-briefcase m-2" />Edytuj ofertę pracy:
       {:else}
         <i class="fas fa-briefcase m-2" />Dodaj ofertę pracy:
@@ -68,17 +68,30 @@
     <div class="strip">wynagrodzenie od - do</div>
     <input class="input_num" bind:value={minimumSalary} type="number" /> -
     <input class="input_num" bind:value={maximumSalary} type="number" />
+    {#if validationErrors.MinimumSalary}
+      <div class="error">
+        {validationErrors.MinimumSalary.join(", ")}
+      </div>
+    {/if}
+    {#if validationErrors.MaximumSalary}
+      <div class="error">
+        {validationErrors.MaximumSalary.join(", ")}
+      </div>
+    {/if}
   </div>
 
   <p />
   <div>
     <button type="button" class="btn btn-secondary zapisz" on:click={saveJob}>
-      zapisz
+      Zapisz
     </button>
   </div>
 </div>
 
 <style lang="scss">
+  $seaColor: rgb(35, 199, 150);
+  $darkSeaColor: rgba(0, 156, 109, 0.7);
+
   .prostokat {
     background-color: white;
     border: 1px solid black;
@@ -89,12 +102,12 @@
   .title {
     font-size: large;
     border: 1px solid black;
-    background-color: rgba(35, 199, 150, 0.5);
+    background-color: rgba($seaColor, 0.5);
     border-radius: 3px;
   }
   .strip {
     font-size: medium;
-    background-color: rgba(35, 199, 150, 0.3);
+    background-color: rgba($seaColor, 0.3);
     border-radius: 3px;
     width: 200px;
     padding: 0 0.2rem;
@@ -109,15 +122,17 @@
   .textarea_description {
     width: 100%;
     height: 150px;
+    min-height: 50px;
   }
   .zapisz {
     width: 100px;
-    background-color: rgba(35, 199, 150, 0.5);
+    background-color: rgba($seaColor, 0.5);
     color: black;
-  }
-  .zapisz:hover {
-    background-color: rgba(0, 156, 109, 0.65);
-    color: black;
+    &:hover,
+    &:focus {
+      background-color: $darkSeaColor;
+      color: black;
+    }
   }
   .error {
     color: crimson;

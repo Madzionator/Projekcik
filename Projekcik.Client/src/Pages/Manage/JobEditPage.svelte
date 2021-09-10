@@ -13,7 +13,7 @@
   onMount(async () => {
     JobService.getJob(id)
       .then((response) => {
-        job = { ...response };
+        job = response;
       })
       .catch((response) => {
         toast.push("błąd");
@@ -35,7 +35,6 @@
         })
         .catch((x) => {
           errors = x.response.data.errors;
-          console.log(errors);
           toast.push("Nie udało się edytować oferty 😿");
         });
     }}
