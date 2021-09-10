@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Projekcik.Api.Models;
+using Projekcik.Core.DTO;
 using Projekcik.Core.Services;
-using Projekcik.Database;
-using Projekcik.Database.Models;
+using Projekcik.Infrastructure.Api;
 
 namespace Projekcik.Api.Controllers
 {
@@ -17,85 +13,45 @@ namespace Projekcik.Api.Controllers
     [Route("[controller]")]
     public class JobController : MyController
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
+        private readonly IJobService _jobService;
 
-        private const string ErrorMessage_CreateJob = "Nie udało się dodać oferty pracy";
-        private const string ErrorMessage_EditJob = "Nie udało się edytować oferty pracy";
-
-        public JobController(DataContext context, IMapper mapper)
+        public JobController(IJobService jobService)
         {
-            _context = context;
-            _mapper = mapper;
+            _jobService = jobService;
         }
 
         [AllowAnonymous]
         [HttpGet]
+        [ProducesResponseType(typeof(JobDto[]), StatusCodes.Status200OK)]
         public IActionResult GetJobsList()
         {
-            var jobs = _context.Jobs.ToList();
-            var jobdtos = _mapper.Map<List<JobDto>>(jobs);
-            return Ok(jobdtos);
+            var jobs = _jobService.BrowseJobs();
+            return Ok();
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(JobDto), StatusCodes.Status200OK)]
         public IActionResult GetJob([FromRoute] Guid id)
         {
-            var job = _context.Jobs.Find(id);
-            if (job is null)
-                return NotFound();
-
-            var jobdto = _mapper.Map<JobDto>(job);
-            return Ok(jobdto);
+            var job = _jobService.GetJob(id);
+            return Ok(job);
         }
 
         [HttpPost]
-        public IActionResult CreateJob([FromBody] JobEditDto jobDto)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult CreateJob([FromBody] JobEditDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return ValidationProblem();
-            }
-
-            try
-            {
-                var job = _mapper.Map<Job>(jobDto);
-                _context.Jobs.Add(job);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return Error(ErrorMessage_CreateJob);
-            }
-
-            return Ok();
+            _jobService.CreateJob(dto);
+            return NoContent();
         }
 
         [HttpPut("{id}")]
-        public IActionResult EditJob([FromBody] JobEditDto jobDto, [FromRoute] Guid id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult EditJob([FromBody] JobEditDto dto, [FromRoute] Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return ValidationProblem();
-            }
-
-            try
-            {
-                var job = _context.Jobs.Find(id);
-                if (job is null)
-                    throw new Exception("job not found");
-
-                job = _mapper.Map(jobDto, job);
-                _context.Jobs.Update(job);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return Error(ErrorMessage_EditJob);
-            }
-
-            return Ok();
+            _jobService.EditJob(id, dto);
+            return NoContent();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Projekcik.Api.Models
+namespace Projekcik.Core.DTO
 {
     public class UserDto
     {

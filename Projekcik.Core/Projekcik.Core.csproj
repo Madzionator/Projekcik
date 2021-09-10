@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Projekcik.Database\Projekcik.Database.csproj" />
+    <ProjectReference Include="..\Projekcik.Infrastructure\Projekcik.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

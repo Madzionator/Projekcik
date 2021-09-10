@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentValidation;
 
-namespace Projekcik.Api.Models
+namespace Projekcik.Core.DTO
 {
     public class JobDto : JobEditDto
     {
@@ -17,9 +17,9 @@ namespace Projekcik.Api.Models
         public string CompanyName { get; set; }
     }
 
-    public class JobDtoValidator : AbstractValidator<JobEditDto>
+    public class JobEditDtoValidator : AbstractValidator<JobEditDto>
     {
-        public JobDtoValidator()
+        public JobEditDtoValidator()
         {
             RuleFor(job => job.Title).MinimumLength(5).MaximumLength(100);
             RuleFor(job => job.Description).MinimumLength(20).MaximumLength(4096);
