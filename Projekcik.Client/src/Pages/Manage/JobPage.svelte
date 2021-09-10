@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import JobService from "../../Services/JobService.js";
+  import { navigate } from "svelte-navigator";
 
   let jobs = [];
 
@@ -15,11 +16,11 @@
   }
 
   function JobAdd() {
-    console.log("add");
+    navigate("jobs/add", { replace: false });
   }
 
-  function JobEdit(job) {
-    console.log("edit", job);
+  function JobEdit(jobId) {
+    navigate(`jobs/edit/${jobId}`, { replace: true });
   }
 
   function JobDelete(job) {
@@ -65,7 +66,7 @@
             {/if}
           </td>
           <td>
-            <button class="btn" on:click={() => JobEdit(job)}>
+            <button class="btn" on:click={() => JobEdit(job.id)}>
               <span class="fa fa-edit" aria-hidden="true" />
             </button>
           </td>
