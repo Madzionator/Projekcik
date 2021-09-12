@@ -26,7 +26,7 @@ namespace Projekcik.Api.Controllers
         public IActionResult GetJobsList()
         {
             var jobs = _jobService.BrowseJobs();
-            return Ok();
+            return Ok(jobs);
         }
 
         [AllowAnonymous]
