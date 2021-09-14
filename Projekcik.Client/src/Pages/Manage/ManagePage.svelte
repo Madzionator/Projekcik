@@ -34,7 +34,7 @@
 
     <Link to="/manage/locations">
       <div class="btn pole btn-outline-secondary">
-        <i class="fas fa-location-arrow ikonka m-2" /><br />Miejsca
+        <i class="fas fa-map-marker-alt ikonka m-2" /><br />Miejsca
       </div>
     </Link>
 
