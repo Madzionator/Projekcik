@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
+    "marked": "^3.0.3",
     "query-string": "^7.0.1",
     "sirv-cli": "^1.0.0",
     "svelte-calendar": "^2.0.4",

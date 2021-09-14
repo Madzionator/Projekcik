@@ -38,7 +38,7 @@
 
 <div class="container prostokat p-3 p-lg-5 mx-auto my-5">
   <div class="title">
-    <i class="fas fa-location-arrow m-2" />Miejsca
+    <i class="fas fa-map-marker-alt m-2" />Miejsca
   </div>
   <p />
   <button class="btn btn-outline-primary dodaj" on:click={LocationAdd}>

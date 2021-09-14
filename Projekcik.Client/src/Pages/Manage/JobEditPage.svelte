@@ -17,7 +17,7 @@
       })
       .catch((response) => {
         toast.push("błąd");
-        navigate("/manage/job", { replace: true });
+        navigate("/manage/jobs", { replace: true });
       });
   });
 </script>
@@ -26,7 +26,7 @@
   <EditJobItem
     {...job}
     validationErrors={errors}
-    onEdit={true}
+    isEdit={true}
     onSave={(jb) => {
       JobService.editJob(job.id, jb)
         .then((response) => {

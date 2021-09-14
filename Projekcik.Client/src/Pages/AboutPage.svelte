@@ -11,6 +11,10 @@
     { content: "😽" },
     { content: "🐗" },
     { content: "❤" },
+    { content: "where" },
+    { content: "teleport" },
+    { content: "*(>^.^)>" },
+    { content: "<(^.^<)*" },
   ];
 </script>
 

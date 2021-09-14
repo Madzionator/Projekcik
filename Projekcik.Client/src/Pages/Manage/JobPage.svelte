@@ -20,7 +20,7 @@
   }
 
   function JobEdit(jobId) {
-    navigate(`jobs/edit/${jobId}`, { replace: true });
+    navigate(`jobs/edit/${jobId}`, { replace: false });
   }
 
   function JobDelete(job) {
