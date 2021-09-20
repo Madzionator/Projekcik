@@ -8,15 +8,12 @@
 
   export let id;
   let job;
-  let locations;
-
   let keywords = ["C#", ".NET", "C++", "js"]; // temporary
 
   onMount(async () => {
     JobService.getJob(id)
       .then((response) => {
         job = response;
-        locations = job.locations.map((jb) => jb.name).join(", ");
       })
       .catch((response) => {
         toast.push("oferta nie istnieje");
@@ -40,7 +37,7 @@
     </div>
     <div class="row">
       <div class="col-6">
-        {locations.length > 0 ? locations : "--"}
+        {job.locations?.map((loc) => loc.name).join(", ") || "--"}
       </div>
       <div class="col-6">
         {job.minimumSalary ?? ""} - {job.maximumSalary ?? ""} PLN

@@ -54,11 +54,9 @@
         <tr>
           <th scope="row">{i + 1}</th>
           <td>{job.title}</td>
-          <td
-            >{job.locations.length > 0
-              ? job.locations.map((x) => x.name).join(", ")
-              : "--"}</td
-          >
+          <td>
+            {job.locations?.map((loc) => loc.name).join(", ") || "--"}
+          </td>
           <td>{job.companyName}</td>
           <td>
             {#if job.minimumSalary}
