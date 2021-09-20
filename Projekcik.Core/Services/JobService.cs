@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Projekcik.Core.DTO;
@@ -31,26 +32,33 @@ namespace Projekcik.Core.Services
         public void CreateJob(JobEditDto dto)
         {
             var job = _mapper.Map<Job>(dto);
+            job.Locations = _context.Locations.Where(location => dto.LocationIds.Contains(location.Id)).ToList();
             _context.Jobs.Add(job);
             _context.SaveChanges();
         }
 
         public void EditJob(Guid id, JobEditDto dto)
         {
-            var job = _context.Jobs.Find(id);
+            var job = _context.Jobs
+                .Include(jb => jb.Locations)
+                .FirstOrDefault(jb => jb.Id == id);
             if (job is null)
             {
                 throw new JobNotFoundException(id);
             }
 
             job = _mapper.Map(dto, job);
+            job.Locations = _context.Locations.Where(location => dto.LocationIds.Contains(location.Id)).ToList();
             _context.Jobs.Update(job);
             _context.SaveChanges();
         }
 
         public JobDto GetJob(Guid id)
         {
-            var job = _context.Jobs.Find(id);
+            var job = _context.Jobs
+                .Include(jb => jb.Locations)
+                .FirstOrDefault(jb => jb.Id == id);
+
             if (job is null)
             {
                 throw new JobNotFoundException(id);
@@ -62,7 +70,7 @@ namespace Projekcik.Core.Services
 
         public IList<JobDto> BrowseJobs()
         {
-            var jobs = _context.Jobs.AsNoTracking();
+            var jobs = _context.Jobs.Include(x => x.Locations).AsNoTracking();
             return _mapper.Map<List<JobDto>>(jobs);
         }
     }

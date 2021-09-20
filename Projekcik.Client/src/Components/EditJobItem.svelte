@@ -1,13 +1,32 @@
 <script>
+  import { onMount } from "svelte";
+  import LocationService from "../Services/LocationService";
+
   export let title = "";
   export let description = "";
   export let minimumSalary;
   export let maximumSalary;
   export let companyName;
+  export let locations = [];
+  let locationIds = locations.map((x) => x.id);
   export let isEdit = false;
 
   export let validationErrors = {};
   export let onSave;
+
+  let allLocations = [];
+
+  onMount(async () => {
+    LocationService.getLocationsList().then((response) => {
+      let top = response
+        .filter((x) => x.id < 0)
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+      let rest = response
+        .filter((x) => x.id >= 0)
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+      allLocations = top.concat(rest);
+    });
+  });
 
   function saveJob() {
     onSave({
@@ -16,6 +35,7 @@
       minimumSalary,
       maximumSalary,
       companyName,
+      locationIds,
     });
   }
 </script>
@@ -63,6 +83,32 @@
       </div>
     {/if}
   </div>
+
+  {#if allLocations}
+    <div class="mb-3">
+      <div class="strip">lokalizacja</div>
+
+      {#each allLocations as loc}
+        <div class="form-check col-6">
+          <input
+            class="form-check-input"
+            id="xd"
+            type="checkbox"
+            value={loc.id}
+            bind:group={locationIds}
+          />
+          <label class="form-check-label" for="xd">
+            {loc.name}
+          </label>
+        </div>
+      {/each}
+      {#if validationErrors.LocationIds}
+        <div class="error">
+          {validationErrors.LocationIds.join(", ")}
+        </div>
+      {/if}
+    </div>
+  {/if}
 
   <div class="mb-3">
     <div class="strip">wynagrodzenie od - do</div>

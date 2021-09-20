@@ -3,8 +3,8 @@
   export let minimumSalary;
   export let maximumSalary;
   export let companyName;
-  // export location;
-  // export let keywords;
+  export let locations;
+  let locationsStr = locations.map((loc) => loc.name).join(", ");
   let keywords = ["C#", ".NET", "C++", "js"];
 </script>
 
@@ -26,7 +26,8 @@
       </div>
       <div class="row">
         <div class="col">
-          <i class="fas fa-map-marker-alt" /> jakaś lokalizacja
+          <i class="fas fa-map-marker-alt" />
+          {locationsStr.length > 0 ? locationsStr : "--"}
         </div>
         <div class="col">
           {#each keywords as keyword}
