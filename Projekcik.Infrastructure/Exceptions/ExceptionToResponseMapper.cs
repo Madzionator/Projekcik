@@ -17,18 +17,7 @@ namespace Projekcik.Infrastructure.Exceptions
             };
 
         private record Error(string Code, string Message);
-
-        private class ErrorsResponse
-        {
-            public ErrorsResponse(string title, params Error[] errors)
-            {
-                Errors = errors;
-                Title = title;
-            }
-
-            public string Title { get; }
-            public Error[] Errors { get; }
-        }
+        private record ErrorsResponse(string Title, params Error[] Errors);
 
         private static string GetErrorCode(object exception)
         {

@@ -8,7 +8,6 @@
 
   export let id;
   let job;
-
   let keywords = ["C#", ".NET", "C++", "js"]; // temporary
 
   onMount(async () => {
@@ -37,7 +36,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6">Zdalne, Rzeszów, Kraków, Warszawa...</div>
+      <div class="col-6">
+        {job.locations?.map((loc) => loc.name).join(", ") || "--"}
+      </div>
       <div class="col-6">
         {job.minimumSalary ?? ""} - {job.maximumSalary ?? ""} PLN
       </div>

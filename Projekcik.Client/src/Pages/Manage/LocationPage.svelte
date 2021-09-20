@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { identity } from "svelte/internal";
   import LocationService from "../../Services/LocationService.js";
 
   let locations = [];

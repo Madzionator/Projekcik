@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,6 +15,7 @@ namespace Projekcik.Database.Models
         public string CompanyName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
+        public ICollection<Location> Locations { get; set; }
     }
 
     public class JobMap : IEntityTypeConfiguration<Job>

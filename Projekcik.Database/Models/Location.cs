@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Projekcik.Database.Models
@@ -7,6 +8,8 @@ namespace Projekcik.Database.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<Job> Jobs { get; set; }
     }
 
     public class LocationMap : IEntityTypeConfiguration<Location>

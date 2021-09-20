@@ -42,7 +42,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Oferta</th>
-        <th scope="col">Miejsce</th>
+        <th scope="col">Lokalizacja</th>
         <th scope="col">Firma</th>
         <th scope="col">Wypłata (zł)</th>
         <th scope="col">Edytuj</th>
@@ -54,7 +54,9 @@
         <tr>
           <th scope="row">{i + 1}</th>
           <td>{job.title}</td>
-          <td>{job.location}</td>
+          <td>
+            {job.locations?.map((loc) => loc.name).join(", ") || "--"}
+          </td>
           <td>{job.companyName}</td>
           <td>
             {#if job.minimumSalary}
