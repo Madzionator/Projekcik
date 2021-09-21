@@ -3,7 +3,7 @@
   import { toast } from "@zerodevx/svelte-toast";
 
   import { onMount } from "svelte";
-  import { navigate } from "svelte-navigator";
+  import { navigate, Link } from "svelte-navigator";
   import JobService from "../Services/JobService";
 
   export let id;
@@ -50,6 +50,10 @@
     </div>
     <p class="clue">Opis</p>
     <div class="preview">{@html marked(job.description)}</div>
+
+    <Link to="/job/apply/{job.id}">
+      <button class="btn btn-success apply"> Aplikuj </button>
+    </Link>
   </div>
 {/if}
 
@@ -74,6 +78,17 @@
     margin: 3px;
     &:first-child {
       margin-left: 0;
+    }
+  }
+  .apply {
+    @import "../global.scss";
+    width: 100px;
+    background-color: rgba($green1, 0.8);
+    color: black;
+    &:hover,
+    &:focus {
+      background-color: $green2;
+      color: black;
     }
   }
 </style>

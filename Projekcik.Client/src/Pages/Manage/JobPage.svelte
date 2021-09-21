@@ -33,7 +33,7 @@
     <i class="fas fa-briefcase m-2" />Oferty Pracy
   </div>
   <p />
-  <button class="btn btn-outline-primary dodaj" on:click={JobAdd}>
+  <button class="btn btn-outline-primary" on:click={JobAdd}>
     <span class="fa fa-plus" aria-hidden="true" /> Dodaj ofertę
   </button>
   <p />
