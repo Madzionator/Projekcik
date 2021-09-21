@@ -10,12 +10,14 @@
   import HomePage from "./Pages/HomePage.svelte";
   import Footer from "./Components/Footer.svelte";
   import JobInfoPage from "./Pages/JobInfoPage.svelte";
+  import JobApplyPage from "./Pages/JobApplyPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
     { path: "about", component: AboutPage },
     { path: "auth/*", component: _Auth },
     { path: "job/:id", component: JobInfoPage },
+    { path: "job/apply/:id", component: JobApplyPage },
   ];
 
   const protectedRoutes = [{ path: "manage/*", component: _Manage }];
