@@ -16,7 +16,6 @@
     JobService.getJob(id)
       .then((response) => {
         job = response;
-        console.log(job);
       })
       .catch((response) => {
         toast.push("oferta nie istnieje");
@@ -29,8 +28,8 @@
   }
 </script>
 
-{#if job}
-  <div class="container prostokat p-3 p-lg-5 mx-auto my-5">
+<div class="container prostokat p-3 p-lg-5 mx-auto my-5">
+  {#if job}
     <div class="mb-3 title">
       <i class="fas fa-briefcase m-2" />Aplikacja na stanowisko:
       <b>{job.title}</b>
@@ -112,22 +111,28 @@
         </button>
       </div>
     </div>
-  </div>
-{/if}
+  {:else}
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  {/if}
+</div>
 
 <style lang="scss">
+  @import "../global.scss";
   .prostokat {
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
     border-bottom-width: 2px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 10px rgba(black, 0.2);
   }
   .dane {
     margin: 3px;
   }
   .title {
-    @import "../global.scss";
     font-size: large;
     border: 1px solid black;
     background-color: rgba($green2, 0.6);
@@ -138,7 +143,6 @@
     font-size: large;
   }
   .apply {
-    @import "../global.scss";
     width: 200px;
     background-color: rgba($green2, 0.6);
     color: black;
