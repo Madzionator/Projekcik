@@ -44,5 +44,20 @@ namespace Projekcik.Api.Controllers
             return NoContent();
         }
 
+        [Authorize]
+        [HttpGet("download-request/{candidateId}")]
+        public IActionResult DownloadRequest([FromRoute] Guid candidateId)
+        {
+            var candidate = _candidateService.GetCandidate(candidateId);
+            if (candidate == null)
+                return NotFound();
+
+            var file =
+                new FileContentResult(System.IO.File.ReadAllBytes(candidate.CvPath), "application/pdf")
+                {
+                    FileDownloadName = $"{candidate.FirstName}.{candidate.LastName}.{candidate.Id}.pdf"
+                };
+            return file;
+        }
     }
 }

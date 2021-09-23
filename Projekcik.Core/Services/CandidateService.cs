@@ -13,6 +13,7 @@ namespace Projekcik.Core.Services
     public interface ICandidateService
     {
         void CreateForJob(CandidateDto dto);
+        CandidateDto GetCandidate(Guid CandidateId);
     }
 
     public class CandidateService : ICandidateService
@@ -33,5 +34,11 @@ namespace Projekcik.Core.Services
             _context.SaveChanges();
         }
 
+        public CandidateDto GetCandidate(Guid CandidateId)
+        {
+            var candidate = _context.Candidates.Find(CandidateId);
+            var dto = _mapper.Map<CandidateDto>(candidate);
+            return dto;
+        }
     }
 }
