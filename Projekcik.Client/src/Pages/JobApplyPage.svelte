@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { navigate } from "svelte-navigator";
+  import CandidateService from "../Services/CandidateService";
   import JobService from "../Services/JobService";
 
   export let id; // job id
@@ -24,7 +25,16 @@
   });
 
   function Apply() {
-    console.log("apply");
+    const formData = new FormData();
+    formData.append("file", cv[0]);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("emailAddress", emailAddress);
+    formData.append("comment", comment);
+    CandidateService.applyForJob(id, formData)
+      .then((response) => console.log("git"))
+      .catch((response) => console.log("nie git"));
   }
 </script>
 
@@ -101,7 +111,7 @@
           class="form-control"
           id="cv"
           accept="application/pdf"
-          bind:value={cv}
+          bind:files={cv}
         />
       </div>
 

@@ -12,6 +12,7 @@ namespace Projekcik.Core.DTO
             CreateMap<Location, LocationDto>().ReverseMap();
             CreateMap<Job, JobDto>().ReverseMap();
             CreateMap<Job, JobEditDto>().ReverseMap();
+            CreateMap<Candidate, CandidateDto>().ReverseMap();
         }
     }
 }
