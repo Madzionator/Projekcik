@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { navigate } from "svelte-navigator";
-  import CandidateService from "../Services/CandidateService";
-  import JobService from "../Services/JobService";
+  import CandidateService from "../../Services/CandidateService";
+  import JobService from "../../Services/JobService";
 
   export let id; // job id
   let job;
@@ -33,7 +33,9 @@
     formData.append("emailAddress", emailAddress);
     formData.append("comment", comment);
     CandidateService.applyForJob(id, formData)
-      .then((response) => console.log("git"))
+      .then((response) => {
+        navigate("/job/thanksforapplying", { replace: true });
+      })
       .catch((response) => console.log("nie git"));
   }
 </script>
@@ -131,7 +133,7 @@
 </div>
 
 <style lang="scss">
-  @import "../global.scss";
+  @import "src/global.scss";
   .prostokat {
     background-color: white;
     border: 1px solid black;

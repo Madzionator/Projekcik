@@ -4,7 +4,7 @@
 
   import { onMount } from "svelte";
   import { navigate, Link } from "svelte-navigator";
-  import JobService from "../Services/JobService";
+  import JobService from "../../Services/JobService";
 
   export let id;
   let job;
@@ -22,8 +22,8 @@
   });
 </script>
 
-{#if job}
-  <div class="container prostokat p-3 p-lg-5 mx-auto my-5">
+<div class="container prostokat p-3 p-lg-5 mx-auto my-5">
+  {#if job}
     <h7 class="clue">Oferta pracy</h7>
     <h4>{job.title} <span class="company">{job.companyName}</span></h4>
 
@@ -54,8 +54,14 @@
     <Link to="/job/apply/{job.id}">
       <button class="btn btn-success apply"> Aplikuj </button>
     </Link>
-  </div>
-{/if}
+  {:else}
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  {/if}
+</div>
 
 <style lang="scss">
   .prostokat {
@@ -81,7 +87,7 @@
     }
   }
   .apply {
-    @import "../global.scss";
+    @import "src/global.scss";
     width: 100px;
     background-color: rgba($green1, 0.8);
     color: black;
