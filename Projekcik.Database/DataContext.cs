@@ -13,6 +13,7 @@ namespace Projekcik.Database
         public DbSet<User> Users { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Candidate> Candidates { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)

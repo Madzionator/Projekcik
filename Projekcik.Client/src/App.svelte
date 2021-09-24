@@ -1,7 +1,7 @@
 <script>
   import _Auth from "./Pages/Auth/_Auth.svelte";
   import _Manage from "./Pages/Manage/_Manage.svelte";
-  import { Router, Link, Route } from "svelte-navigator";
+  import { Router, Route } from "svelte-navigator";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import Header from "./Components/Header.svelte";
   import ErrorPage from "./Pages/ErrorPage.svelte";
@@ -9,8 +9,9 @@
   import AboutPage from "./Pages/AboutPage.svelte";
   import HomePage from "./Pages/HomePage.svelte";
   import Footer from "./Components/Footer.svelte";
-  import JobInfoPage from "./Pages/JobInfoPage.svelte";
-  import JobApplyPage from "./Pages/JobApplyPage.svelte";
+  import JobInfoPage from "./Pages/Job/JobInfoPage.svelte";
+  import JobApplyPage from "./Pages/Job/JobApplyPage.svelte";
+  import ApplyConfirmPage from "./Pages/Job/ApplyConfirmPage.svelte";
 
   const routes = [
     { path: "/", component: HomePage },
@@ -18,6 +19,7 @@
     { path: "auth/*", component: _Auth },
     { path: "job/:id", component: JobInfoPage },
     { path: "job/apply/:id", component: JobApplyPage },
+    { path: "job/thanksforapplying", component: ApplyConfirmPage },
   ];
 
   const protectedRoutes = [{ path: "manage/*", component: _Manage }];

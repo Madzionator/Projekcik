@@ -6,7 +6,7 @@
   import JobCard from "../Components/JobCard.svelte";
   import JobService from "../Services/JobService";
 
-  let jobs = [];
+  let jobs;
 
   onMount(async () => {
     JobService.getJobsList().then((response) => {
@@ -21,19 +21,27 @@
 
 <Banner />
 <h3 class="text-center">Najnowsze oferty pracy</h3>
-<div class="container prostokaciki">
-  <div class="row">
-    {#each jobs as job}
-      <div
-        class="col-12 col-md-12 col-lg-6"
-        type="button"
-        on:click={GoToJob(job.id)}
-      >
-        <JobCard {...job} />
-      </div>
-    {/each}
+{#if jobs}
+  <div class="container prostokaciki">
+    <div class="row">
+      {#each jobs as job}
+        <div
+          class="col-12 col-md-12 col-lg-6"
+          type="button"
+          on:click={GoToJob(job.id)}
+        >
+          <JobCard {...job} />
+        </div>
+      {/each}
+    </div>
   </div>
-</div>
+{:else}
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+{/if}
 
 <div class="p-5" />
 

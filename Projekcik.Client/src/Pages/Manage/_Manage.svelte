@@ -1,6 +1,7 @@
 <script>
   import { Router } from "svelte-navigator";
   import ProtectedRoute from "../../Components/ProtectedRoute.svelte";
+  import CandidatePage from "./CandidatePage.svelte";
   import JobAddPage from "./JobAddPage.svelte";
   import JobEditPage from "./JobEditPage.svelte";
   import JobPage from "./JobPage.svelte";
@@ -13,6 +14,7 @@
     { path: "jobs", component: JobPage },
     { path: "jobs/add", component: JobAddPage },
     { path: "jobs/edit/:id", component: JobEditPage },
+    { path: "candidates", component: CandidatePage },
   ];
 </script>
 

@@ -16,6 +16,7 @@ namespace Projekcik.Database.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public ICollection<Location> Locations { get; set; }
+        public ICollection<Candidate> Candidates { get; set; }
     }
 
     public class JobMap : IEntityTypeConfiguration<Job>

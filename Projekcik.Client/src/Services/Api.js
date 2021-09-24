@@ -45,7 +45,23 @@ const post = (url, request) => apiRequest("post", url, request);
 const put = (url, request) => apiRequest("put", url, request);
 const patch = (url, request) => apiRequest("patch", url, request);
 
+const blobGet = (url) => {
+  const moj_token_autoryzacji = window.localStorage.getItem(authTokenKey);
+  const headers = {
+    authorization: `Bearer ${moj_token_autoryzacji}`,
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+  return axiosAPI({
+    responseType: "blob",
+    method: "GET",
+    url,
+    headers,
+  });
+};
+
 const API = {
+  blobGet,
   get,
   delete: deleteRequest,
   post,
