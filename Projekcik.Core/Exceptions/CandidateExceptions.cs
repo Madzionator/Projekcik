@@ -10,7 +10,6 @@ namespace Projekcik.Core.Exceptions
         }
     }
 
-
     internal class CandidateNotFoundException : CandidateException
     {
         public Guid CandidateId { get; }

@@ -27,7 +27,7 @@
         link.click();
       })
       .catch((response) =>
-        toast.push("Wystąpił błąd zawartość mogła zostać usunięta 😿")
+        toast.push("Wystąpił błąd, zawartość mogła zostać usunięta 😿")
       );
   }
 </script>

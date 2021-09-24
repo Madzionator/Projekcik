@@ -25,7 +25,6 @@ namespace Projekcik.Api.Controllers
             _candidateService = candidateService;
             _candidateValidator = candidateValidator;
         }
-        
 
         [HttpPost("{jobId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -36,8 +35,6 @@ namespace Projekcik.Api.Controllers
             [FromForm] string phoneNumber, [FromForm] string emailAddress, 
             [FromForm] string comment)
         {
-           // if (file is null)
-                //return BadRequest();
 
             var candidateId = Guid.NewGuid();
             var candidateDto = new CandidateDto
@@ -51,8 +48,8 @@ namespace Projekcik.Api.Controllers
                 Comment = comment,
             };
 
-            var xd = (_candidateValidator.Validate(candidateDto));
-            xd.AddToModelState(ModelState, null);
+            var validationResult = (_candidateValidator.Validate(candidateDto));
+            validationResult.AddToModelState(ModelState, null);
             if(file is null)
                 ModelState.AddModelError("file", "Należy dodać plik");
             if (!ModelState.IsValid)
@@ -60,7 +57,8 @@ namespace Projekcik.Api.Controllers
                 return ValidationProblem();
             }
 
-            var filePath = @"C:\Users\Madzia\Desktop\candidate\" + candidateId + ".pdf";
+            Directory.CreateDirectory($"/candidates");
+            var filePath = $"/candidates/{candidateId}.pdf";
             using var fileStream = new FileStream(filePath, FileMode.Create);
             file.CopyTo(fileStream);
             candidateDto.CvPath = filePath;

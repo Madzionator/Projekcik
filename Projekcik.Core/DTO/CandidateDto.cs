@@ -21,10 +21,10 @@ namespace Projekcik.Core.DTO
     {
         public CandidateDtoValidator()
         {
-            RuleFor(candidate => candidate.FirstName).NotEmpty();
-            RuleFor(candidate => candidate.LastName).NotEmpty();
-            RuleFor(candidate => candidate.PhoneNumber).NotEmpty();
-            RuleFor(candidate => candidate.EmailAddress).NotEmpty();
+            RuleFor(candidate => candidate.FirstName).NotEmpty().MaximumLength(100);
+            RuleFor(candidate => candidate.LastName).NotEmpty().MaximumLength(100);
+            RuleFor(candidate => candidate.PhoneNumber).NotEmpty().MaximumLength(32);
+            RuleFor(candidate => candidate.EmailAddress).NotEmpty().MaximumLength(100);
             RuleFor(candidate => candidate.Comment).MaximumLength(2137);
         }
     }

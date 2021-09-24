@@ -16,6 +16,7 @@ namespace Projekcik.Database.Models
         public string CvPath { get; set; }
         public string Comment { get; set; }
         public DateTime CreatedAt { get; set; }
+        public Job Job { get; set; }
     }
 
     public class CandidateMap : IEntityTypeConfiguration<Candidate>
