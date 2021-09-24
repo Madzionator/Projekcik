@@ -1,17 +1,21 @@
 <script>
+  import { toast } from "@zerodevx/svelte-toast";
+
   import { onMount } from "svelte";
   import { navigate } from "svelte-navigator";
   import CandidateService from "../../Services/CandidateService";
   import JobService from "../../Services/JobService";
 
   export let id; // job id
-  let job;
-  let firstName;
-  let lastName;
-  let phoneNumber;
-  let emailAddress;
-  let comment;
-  let cv;
+  let job = "";
+  let firstName = "";
+  let lastName = "";
+  let phoneNumber = "";
+  let emailAddress = "";
+  let comment = "";
+  let cv = [];
+
+  let validationErrors = [];
 
   onMount(async () => {
     JobService.getJob(id)
@@ -36,7 +40,10 @@
       .then((response) => {
         navigate("/job/thanksforapplying", { replace: true });
       })
-      .catch((response) => console.log("nie git"));
+      .catch((x) => {
+        validationErrors = x.response.data.errors;
+        toast.push("Nie udało się aplikować 😿");
+      });
   }
 </script>
 
@@ -59,6 +66,11 @@
             bind:value={firstName}
             placeholder="Twoje imię"
           />
+          {#if validationErrors.firstName}
+            <div class="error">
+              {validationErrors.firstName.join(", ")}
+            </div>
+          {/if}
         </div>
         <div class="col-12 col-md-12 col-lg-6 mb-3">
           <label for="lastName" class="form-label">Nazwisko:</label>
@@ -69,6 +81,11 @@
             bind:value={lastName}
             placeholder="Twoje nazwisko"
           />
+          {#if validationErrors.lastName}
+            <div class="error">
+              {validationErrors.lastName.join(", ")}
+            </div>
+          {/if}
         </div>
       </div>
     </div>
@@ -83,6 +100,11 @@
           bind:value={phoneNumber}
           placeholder="Twój numer telefonu"
         />
+        {#if validationErrors.phoneNumber}
+          <div class="error">
+            {validationErrors.phoneNumber.join(", ")}
+          </div>
+        {/if}
       </div>
       <div class="col-12 col-md-12 col-lg-6 mb-3">
         <label for="emailAddress" class="form-label">Adres email:</label>
@@ -93,6 +115,11 @@
           bind:value={emailAddress}
           placeholder="Twój adres email"
         />
+        {#if validationErrors.emailAddress}
+          <div class="error">
+            {validationErrors.emailAddress.join(", ")}
+          </div>
+        {/if}
       </div>
 
       <div class="mb-3">
@@ -104,6 +131,11 @@
           bind:value={comment}
           placeholder="Możesz zostawić komentarz dla HR."
         />
+        {#if validationErrors.comment}
+          <div class="error">
+            {validationErrors.comment.join(", ")}
+          </div>
+        {/if}
       </div>
 
       <div class=" mb-3">
@@ -115,6 +147,11 @@
           accept="application/pdf"
           bind:files={cv}
         />
+        {#if validationErrors.file}
+          <div class="error">
+            {validationErrors.file.join(", ")}
+          </div>
+        {/if}
       </div>
 
       <div class="mt-3">
@@ -163,5 +200,10 @@
       background-color: rgba($green1, 0.8);
       color: black;
     }
+  }
+  .error {
+    color: crimson;
+    font-size: small;
+    padding-top: 3px;
   }
 </style>

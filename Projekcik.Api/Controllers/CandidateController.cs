@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +16,12 @@ namespace Projekcik.Api.Controllers
     public class CandidateController : MyController
     {
         private readonly ICandidateService _candidateService;
+        private readonly IValidator<CandidateDto> _candidateValidator;
 
-        public CandidateController(ICandidateService candidateService)
+        public CandidateController(ICandidateService candidateService, IValidator<CandidateDto> candidateValidator)
         {
             _candidateService = candidateService;
+            _candidateValidator = candidateValidator;
         }
         
 
@@ -30,16 +34,35 @@ namespace Projekcik.Api.Controllers
             [FromForm] string phoneNumber, [FromForm] string emailAddress, 
             [FromForm] string comment)
         {
-            if (file is null)
-                return BadRequest();
+           // if (file is null)
+                //return BadRequest();
 
-            Guid candidateId = Guid.NewGuid();
+            var candidateId = Guid.NewGuid();
+            var candidateDto = new CandidateDto
+            {
+                Id = candidateId,
+                JobId = jobId,
+                FirstName = firstName,
+                LastName = lastName,
+                PhoneNumber = phoneNumber,
+                EmailAddress = emailAddress,
+                Comment = comment,
+            };
+
+            var xd = (_candidateValidator.Validate(candidateDto));
+            xd.AddToModelState(ModelState, null);
+            if(file is null)
+                ModelState.AddModelError("file", "Należy dodać plik");
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem();
+            }
+
             var filePath = @"C:\Users\Madzia\Desktop\candidate\" + candidateId + ".pdf";
             using var fileStream = new FileStream(filePath, FileMode.Create);
             file.CopyTo(fileStream);
+            candidateDto.CvPath = filePath;
 
-            var candidateDto = new CandidateDto(candidateId, jobId, firstName, lastName,
-                phoneNumber, emailAddress, filePath, comment);
             _candidateService.CreateForJob(candidateDto);
             return NoContent();
         }

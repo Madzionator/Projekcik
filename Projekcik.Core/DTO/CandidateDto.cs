@@ -15,19 +15,6 @@ namespace Projekcik.Core.DTO
         public string EmailAddress { get; set; }
         public string CvPath { get; set; }
         public string Comment { get; set; }
-
-        public CandidateDto(Guid id, Guid jobId, string firstName, string lastName, string phoneNumber,
-            string emailAddress, string cvPath, string comment)
-        {
-            Id = id;
-            JobId = jobId;
-            FirstName = firstName;
-            LastName = lastName;
-            PhoneNumber = phoneNumber;
-            EmailAddress = emailAddress;
-            CvPath = cvPath;
-            Comment = comment;
-        }
     }
 
     public class CandidateDtoValidator : AbstractValidator<CandidateDto>
