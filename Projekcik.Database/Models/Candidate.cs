@@ -29,7 +29,7 @@ namespace Projekcik.Database.Models
             candidate.Property(x => x.PhoneNumber).IsRequired().HasMaxLength(32);
             candidate.Property(x => x.EmailAddress).IsRequired().HasMaxLength(100);
             candidate.Property(x => x.CvPath).IsRequired();
-            candidate.Property(x => x.Comment).HasMaxLength(1024);
+            candidate.Property(x => x.Comment).HasMaxLength(2137);
             candidate.Property(x => x.CreatedAt).IsRequired();
         }
     }

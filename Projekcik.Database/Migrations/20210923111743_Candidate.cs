@@ -18,7 +18,7 @@ namespace Projekcik.Database.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CvPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(1024)", maxLength: 2137, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

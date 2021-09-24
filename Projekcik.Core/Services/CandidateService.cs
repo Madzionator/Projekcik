@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Projekcik.Core.DTO;
 using Projekcik.Core.Exceptions;
@@ -14,6 +15,7 @@ namespace Projekcik.Core.Services
     {
         void CreateForJob(CandidateDto dto);
         CandidateDto GetCandidate(Guid CandidateId);
+        IList<CandidateDto> BrowseCandidates();
     }
 
     public class CandidateService : ICandidateService
@@ -37,8 +39,19 @@ namespace Projekcik.Core.Services
         public CandidateDto GetCandidate(Guid CandidateId)
         {
             var candidate = _context.Candidates.Find(CandidateId);
+            if (candidate is null)
+            {
+                throw new CandidateNotFoundException(CandidateId);
+            }
+
             var dto = _mapper.Map<CandidateDto>(candidate);
             return dto;
+        }
+
+        public IList<CandidateDto> BrowseCandidates()
+        {
+            var candidates = _context.Candidates.AsNoTracking();
+            return _mapper.Map<List<CandidateDto>>(candidates);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Projekcik.Core.DTO
             RuleFor(candidate => candidate.LastName).NotEmpty();
             RuleFor(candidate => candidate.PhoneNumber).NotEmpty();
             RuleFor(candidate => candidate.EmailAddress).NotEmpty();
-            RuleFor(candidate => candidate.Comment).MaximumLength(1024);
+            RuleFor(candidate => candidate.Comment).MaximumLength(2137);
         }
     }
 }

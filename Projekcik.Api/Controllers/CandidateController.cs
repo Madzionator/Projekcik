@@ -5,6 +5,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 using Projekcik.Core.DTO;
 using Projekcik.Core.Services;
 using Projekcik.Infrastructure.Api;
@@ -78,9 +80,17 @@ namespace Projekcik.Api.Controllers
             var file =
                 new FileContentResult(System.IO.File.ReadAllBytes(candidate.CvPath), "application/pdf")
                 {
-                    FileDownloadName = $"{candidate.FirstName}.{candidate.LastName}.{candidate.Id}.pdf"
+                    FileDownloadName = $"{candidate.FirstName}.{candidate.LastName}.{candidate.Id}.pdf",
                 };
             return file;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetCandidatesList()
+        {
+            var candidates = _candidateService.BrowseCandidates();
+            return Ok(candidates);
         }
     }
 }
