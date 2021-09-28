@@ -90,5 +90,14 @@ namespace Projekcik.Api.Controllers
             var candidates = _candidateService.BrowseCandidates();
             return Ok(candidates);
         }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult DeleteCandidate([FromRoute] Guid id)
+        {
+            _candidateService.DeleteCandidate(id);
+            return NoContent();
+        }
     }
 }

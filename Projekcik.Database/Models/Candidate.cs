@@ -16,6 +16,7 @@ namespace Projekcik.Database.Models
         public string CvPath { get; set; }
         public string Comment { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool IsDeleted { get; set; }
         public Job Job { get; set; }
     }
 
@@ -32,6 +33,8 @@ namespace Projekcik.Database.Models
             candidate.Property(x => x.CvPath).IsRequired();
             candidate.Property(x => x.Comment).HasMaxLength(2137);
             candidate.Property(x => x.CreatedAt).IsRequired();
+            candidate.Property(x => x.IsDeleted).HasDefaultValue(false);
+            candidate.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

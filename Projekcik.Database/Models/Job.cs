@@ -15,6 +15,7 @@ namespace Projekcik.Database.Models
         public string CompanyName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
+        public bool IsDeleted { get; set; }
         public ICollection<Location> Locations { get; set; }
         public ICollection<Candidate> Candidates { get; set; }
     }
@@ -28,6 +29,8 @@ namespace Projekcik.Database.Models
            job.Property(x => x.Description).IsRequired().HasMaxLength(4096);
            job.Property(x => x.CompanyName).IsRequired().HasMaxLength(100);
            job.Property(x => x.CreatedAt).IsRequired();
+           job.Property(x => x.IsDeleted).HasDefaultValue(false);
+           job.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

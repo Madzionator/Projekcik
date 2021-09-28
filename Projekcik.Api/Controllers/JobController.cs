@@ -53,5 +53,13 @@ namespace Projekcik.Api.Controllers
             _jobService.EditJob(id, dto);
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult DeleteJob([FromRoute] Guid id)
+        {
+            _jobService.DeleteJob(id);
+            return NoContent();
+        }
     }
 }
