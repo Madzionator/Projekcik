@@ -1,18 +1,20 @@
 <script>
   import { toast } from "@zerodevx/svelte-toast";
-
   import { onMount } from "svelte";
-  import { navigate } from "svelte-navigator";
   import CandidateService from "../../Services/CandidateService";
 
   let candidates = [];
   let visibleComment = "";
 
   onMount(async () => {
+    Refresh();
+  });
+
+  function Refresh() {
     CandidateService.getCandidatesList().then((response) => {
       candidates = response;
     });
-  });
+  }
 
   function CvDownload(candidate) {
     CandidateService.downloadFile(candidate.id)
@@ -29,6 +31,15 @@
       .catch((response) =>
         toast.push("Wystąpił błąd, zawartość mogła zostać usunięta 😿")
       );
+  }
+
+  function CandidateDelete(candidateId) {
+    CandidateService.deleteCandidate(candidateId)
+      .then((response) => {
+        toast.push("usunięto kandydata");
+        Refresh();
+      })
+      .catch((response) => toast.push("nie udało się kandydata"));
   }
 </script>
 
@@ -47,6 +58,7 @@
         <th scope="col">Adres email</th>
         <th scope="col">Komentarz</th>
         <th scope="col">CV</th>
+        <th scope="col">Usuń</th>
       </tr>
     </thead>
     <tbody>
@@ -76,6 +88,11 @@
           <td>
             <button class="btn" on:click={() => CvDownload(candidate)}>
               <span class="fa fa-download" aria-hidden="true" />
+            </button>
+          </td>
+          <td>
+            <button class="btn" on:click={() => CandidateDelete(candidate.id)}>
+              <span class="fa fa-times" aria-hidden="true" />
             </button>
           </td>
         </tr>

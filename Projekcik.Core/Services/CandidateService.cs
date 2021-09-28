@@ -16,6 +16,7 @@ namespace Projekcik.Core.Services
         void CreateForJob(CandidateDto dto);
         CandidateDto GetCandidate(Guid CandidateId);
         IList<CandidateDto> BrowseCandidates();
+        void DeleteCandidate(Guid id);
     }
 
     public class CandidateService : ICandidateService
@@ -52,6 +53,14 @@ namespace Projekcik.Core.Services
         {
             var candidates = _context.Candidates.AsNoTracking();
             return _mapper.Map<List<CandidateDto>>(candidates);
+        }
+
+        public void DeleteCandidate(Guid id)
+        {
+            var candidate = _context.Candidates.Find(id);
+            candidate.IsDeleted = true;
+            _context.Candidates.Update(candidate);
+            _context.SaveChanges();
         }
     }
 }

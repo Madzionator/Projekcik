@@ -16,6 +16,7 @@ namespace Projekcik.Core.Services
         void EditJob(Guid id, JobEditDto dto);
         JobDto GetJob(Guid id);
         IList<JobDto> BrowseJobs();
+        void DeleteJob(Guid id);
     }
 
     public class JobService : IJobService
@@ -72,6 +73,14 @@ namespace Projekcik.Core.Services
         {
             var jobs = _context.Jobs.Include(x => x.Locations).AsNoTracking();
             return _mapper.Map<List<JobDto>>(jobs);
+        }
+
+        public void DeleteJob(Guid id)
+        {
+            var job = _context.Jobs.Find(id);
+            job.IsDeleted = true;
+            _context.Jobs.Update(job);
+            _context.SaveChanges();
         }
     }
 }

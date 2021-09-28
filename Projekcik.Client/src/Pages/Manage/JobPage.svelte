@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import JobService from "../../Services/JobService.js";
   import { navigate } from "svelte-navigator";
+  import { toast } from "@zerodevx/svelte-toast";
 
   let jobs = [];
 
@@ -23,8 +24,13 @@
     navigate(`jobs/edit/${jobId}`, { replace: false });
   }
 
-  function JobDelete(job) {
-    console.log("delete", job);
+  function JobDelete(jobId) {
+    JobService.deleteJob(jobId)
+      .then((response) => {
+        toast.push("usunięto ofertę pracy");
+        Refresh();
+      })
+      .catch((response) => toast.push("nie udało się usunąć oferty"));
   }
 </script>
 
