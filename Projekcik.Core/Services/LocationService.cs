@@ -14,6 +14,7 @@ namespace Projekcik.Core.Services
         void Create(LocationEditDto dto);
         void Edit(int id, LocationEditDto dto);
         IList<LocationDto> Browse();
+        IList<LocationStatsDto> GetStats();
     }
 
     internal class LocationService : ILocationService
@@ -63,6 +64,21 @@ namespace Projekcik.Core.Services
         {
             var locations = _context.Locations.AsNoTracking();
             return _mapper.Map<List<LocationDto>>(locations);
+        }
+
+        public IList<LocationStatsDto> GetStats()
+        {
+            return _context.Locations
+                .Include(x => x.Jobs)
+                .AsNoTracking()
+                .Select(loc =>
+                    new LocationStatsDto
+                    {
+                        Id = loc.Id,
+                        Name = loc.Name,
+                        JobCount = loc.Jobs.Count,
+                    })
+                .ToList();
         }
     }
 }

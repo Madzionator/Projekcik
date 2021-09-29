@@ -9,7 +9,7 @@
   });
 
   function Refresh() {
-    LocationService.getLocationsList().then((response) => {
+    LocationService.getLocationsSatsList().then((response) => {
       let top = response
         .filter((x) => x.id < 0)
         .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
@@ -60,7 +60,7 @@
         <tr>
           <th scope="row">{i + 1}</th>
           <td>{loc.name}</td>
-          <td>cos bedzie</td>
+          <td>{loc.jobCount}</td>
           <td>tu też</td>
           <td>
             {#if loc.id >= 0}

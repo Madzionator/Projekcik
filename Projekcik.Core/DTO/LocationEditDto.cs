@@ -11,6 +11,12 @@ namespace Projekcik.Core.DTO
     {
         public string Name { get; set; }
     }
+    public class LocationStatsDto
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public int JobCount { get; set; }
+    }
 
     public class LocationEditDtoValidator : AbstractValidator<LocationEditDto>
     {
