@@ -28,6 +28,14 @@ namespace Projekcik.Api.Controllers
             return Ok(locations);
         }
 
+        [HttpGet("stats")]
+        [ProducesResponseType(typeof(LocationStatsDto[]), StatusCodes.Status200OK)]
+        public IActionResult GetListWithStats()
+        {
+            var locations = _locationService.GetStats();
+            return Ok(locations);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult CreateLocation([FromBody] LocationEditDto locationDto)
