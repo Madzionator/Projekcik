@@ -3,4 +3,4 @@
   export let id;
 </script>
 
-<JobPreview {id} />
+<JobPreview {id} canApply={false} />
