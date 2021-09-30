@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import JobService from "../../Services/JobService.js";
-  import { navigate } from "svelte-navigator";
+  import { navigate, Link } from "svelte-navigator";
   import { toast } from "@zerodevx/svelte-toast";
 
   let jobs = [];
@@ -59,7 +59,14 @@
       {#each jobs as job, i}
         <tr>
           <th scope="row">{i + 1}</th>
-          <td>{job.title}</td>
+          <td>
+            <div
+              type="button"
+              on:click={navigate(`jobs/preview/${job.id}`, { replace: false })}
+            >
+              {job.title}
+            </div>
+          </td>
           <td>
             {job.locations?.map((loc) => loc.name).join(", ") || "--"}
           </td>

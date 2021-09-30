@@ -5,6 +5,7 @@
   import JobAddPage from "./JobAddPage.svelte";
   import JobEditPage from "./JobEditPage.svelte";
   import JobPage from "./JobPage.svelte";
+  import JobPreviewPage from "./JobPreviewPage.svelte";
   import LocationPage from "./LocationPage.svelte";
   import ManagePage from "./ManagePage.svelte";
 
@@ -14,6 +15,7 @@
     { path: "jobs", component: JobPage },
     { path: "jobs/add", component: JobAddPage },
     { path: "jobs/edit/:id", component: JobEditPage },
+    { path: "jobs/preview/:id", component: JobPreviewPage },
     { path: "candidates", component: CandidatePage },
   ];
 </script>
