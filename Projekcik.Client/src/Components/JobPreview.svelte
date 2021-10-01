@@ -27,7 +27,6 @@
   {#if job}
     <h7 class="clue">Oferta pracy</h7>
     <h4>{job.title} <span class="company">{job.companyName}</span></h4>
-    <hr />
     <div class="row">
       <div class="col-6">
         <p class="clue">Lokalizacja</p>
