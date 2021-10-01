@@ -24,6 +24,10 @@
     navigate(`jobs/edit/${jobId}`, { replace: false });
   }
 
+  function JobPreview(jobId) {
+    navigate(`jobs/preview/${jobId}`, { replace: false });
+  }
+
   function JobDelete(jobId) {
     JobService.deleteJob(jobId)
       .then((response) => {
@@ -32,6 +36,13 @@
       })
       .catch((response) => toast.push("nie udało się usunąć oferty"));
   }
+
+  function LocationsToString(locations, max) {
+    let locArray = locations?.map((loc) => loc.name);
+    if (locArray.length == 0) return "--";
+    if (locArray.length <= max) return locArray.join(", ");
+    return `${locArray[0]}, ${locArray[1]}, +${locArray.length - 2}`;
+  }
 </script>
 
 <div class="container prostokat p-3 p-lg-5 mx-auto my-5">
@@ -39,7 +50,7 @@
     <i class="fas fa-briefcase m-2" />Oferty Pracy
   </div>
   <p />
-  <button class="btn btn-outline-primary" on:click={JobAdd}>
+  <button class="btn btn-outline-primary" on:click={() => JobAdd()}>
     <span class="fa fa-plus" aria-hidden="true" /> Dodaj ofertę
   </button>
   <p />
@@ -60,15 +71,12 @@
         <tr>
           <th scope="row">{i + 1}</th>
           <td>
-            <div
-              type="button"
-              on:click={navigate(`jobs/preview/${job.id}`, { replace: false })}
-            >
+            <div type="button" on:click={() => JobPreview(job.id)}>
               {job.title}
             </div>
           </td>
           <td>
-            {job.locations?.map((loc) => loc.name).join(", ") || "--"}
+            {LocationsToString(job.locations, 2)}
           </td>
           <td>{job.companyName}</td>
           <td>

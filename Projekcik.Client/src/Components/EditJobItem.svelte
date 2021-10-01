@@ -88,16 +88,16 @@
     <div class="mb-3">
       <div class="strip">lokalizacja</div>
 
-      {#each allLocations as loc}
+      {#each allLocations as loc, i}
         <div class="form-check col-6">
           <input
             class="form-check-input"
-            id="xd"
+            id="location_{i}"
             type="checkbox"
             value={loc.id}
             bind:group={locationIds}
           />
-          <label class="form-check-label" for="xd">
+          <label class="form-check-label" for="location_{i}">
             {loc.name}
           </label>
         </div>

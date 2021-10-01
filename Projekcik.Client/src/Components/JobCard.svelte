@@ -4,7 +4,14 @@
   export let maximumSalary;
   export let companyName;
   export let locations;
-  let keywords = ["C#", ".NET", "C++", "js"];
+  let keywords = ["C#", ".NET", "C++", "js", "svelte"];
+
+  function LocationsToString(max) {
+    let locArray = locations?.map((loc) => loc.name);
+    if (locArray.length == 0) return "--";
+    if (locArray.length <= max) return locArray.join(", ");
+    return `${locArray[0]}, ${locArray[1]}, +${locArray.length - 2}`;
+  }
 </script>
 
 <div class="card job_element">
@@ -26,12 +33,15 @@
       <div class="row">
         <div class="col">
           <i class="fas fa-map-marker-alt" />
-          {locations?.map((loc) => loc.name).join(", ") || "--"}
+          {LocationsToString(2)}
         </div>
         <div class="col">
-          {#each keywords as keyword}
+          {#each keywords.slice(0, 4) as keyword, i}
             <span class="badge bg-secondary keyword">{keyword}</span>
           {/each}
+          {#if keywords.length > 4}
+            +{keywords.length - 4}
+          {/if}
         </div>
       </div>
     </div>
@@ -48,6 +58,7 @@
   .data {
     margin: 4px 8px 4px 8px;
     line-height: 30px;
+    color: rgba(98, 105, 113, 1);
   }
   .keyword {
     margin-right: 3px;
