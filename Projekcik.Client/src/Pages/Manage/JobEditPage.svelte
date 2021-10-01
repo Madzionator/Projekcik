@@ -31,7 +31,6 @@
       JobService.editJob(job.id, jb)
         .then((response) => {
           toast.push("Udało się edytować ofertę 😻");
-          navigate("/manage/jobs", { replace: true });
         })
         .catch((x) => {
           errors = x.response.data.errors;

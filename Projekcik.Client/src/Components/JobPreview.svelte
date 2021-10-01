@@ -27,7 +27,7 @@
   {#if job}
     <h7 class="clue">Oferta pracy</h7>
     <h4>{job.title} <span class="company">{job.companyName}</span></h4>
-
+    <hr />
     <div class="row">
       <div class="col-6">
         <p class="clue">Lokalizacja</p>
@@ -49,9 +49,10 @@
         <span class="badge bg-secondary keyword">{keyword}</span>
       {/each}
     </div>
+    <hr />
     <p class="clue">Opis</p>
     <div class="preview">{@html marked(job.description)}</div>
-
+    <hr />
     {#if canApply}
       <Link to="/job/apply/{job.id}">
         <button class="btn btn-success apply"> Aplikuj </button>
