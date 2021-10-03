@@ -3,7 +3,7 @@ import Api from "./Api";
 export default {
   getLocationsList: () => Api.get("/locations"),
 
-  getLocationsSatsList: () => Api.get("/locations/stats"),
+  getLocationsStatsList: () => Api.get("/locations/stats"),
 
   createLocation: (name) => Api.post("/locations", { name }),
 

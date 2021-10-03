@@ -38,6 +38,14 @@ namespace Projekcik.Api.Controllers
             return Ok(job);
         }
 
+        [HttpGet("stats")]
+        [ProducesResponseType(typeof(LocationStatsDto[]), StatusCodes.Status200OK)]
+        public IActionResult GetListWithStats()
+        {
+            var jobs = _jobService.GetStats();
+            return Ok(jobs);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult CreateJob([FromBody] JobEditDto dto)

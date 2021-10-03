@@ -11,7 +11,7 @@
   });
 
   function Refresh() {
-    JobService.getJobsList().then((response) => {
+    JobService.getJobsStatsList().then((response) => {
       jobs = response;
     });
   }
@@ -62,6 +62,7 @@
         <th scope="col">Lokalizacja</th>
         <th scope="col">Firma</th>
         <th scope="col">Wypłata (zł)</th>
+        <th scope="col">Kandydaci</th>
         <th scope="col">Edytuj</th>
         <th scope="col">Usuń</th>
       </tr>
@@ -89,6 +90,8 @@
             {/if}
           </td>
           <td>
+            {job.candidateCount}
+          </td><td>
             <button class="btn" on:click={() => JobEdit(job.id)}>
               <span class="fa fa-edit" aria-hidden="true" />
             </button>

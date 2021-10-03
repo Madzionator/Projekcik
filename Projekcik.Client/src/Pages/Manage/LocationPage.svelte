@@ -9,7 +9,7 @@
   });
 
   function Refresh() {
-    LocationService.getLocationsSatsList().then((response) => {
+    LocationService.getLocationsStatsList().then((response) => {
       let top = response
         .filter((x) => x.id < 0)
         .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
