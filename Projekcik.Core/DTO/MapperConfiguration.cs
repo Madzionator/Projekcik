@@ -13,7 +13,6 @@ namespace Projekcik.Core.DTO
             CreateMap<Job, JobDto>().ReverseMap();
             CreateMap<Job, JobEditDto>().ReverseMap();
             CreateMap<Candidate, CandidateDto>().ReverseMap();
-
             CreateMap<Job, JobStatsDto>()
                 .ForMember(x => x.CandidateCount, opts => opts.MapFrom(x => x.Candidates.Count));
         }
