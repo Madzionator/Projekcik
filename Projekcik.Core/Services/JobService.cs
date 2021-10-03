@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Projekcik.Core.DTO;
@@ -17,6 +18,7 @@ namespace Projekcik.Core.Services
         JobDto GetJob(Guid id);
         IList<JobDto> BrowseJobs();
         void DeleteJob(Guid id);
+        IList<JobStatsDto> GetStats();
     }
 
     public class JobService : IJobService
@@ -81,6 +83,25 @@ namespace Projekcik.Core.Services
             job.IsDeleted = true;
             _context.Jobs.Update(job);
             _context.SaveChanges();
+        }
+
+        public IList<JobStatsDto> GetStats()
+        {
+            return _context.Jobs
+                .Include(x => x.Locations)
+                .AsNoTracking()
+                .Select(job =>
+                    new JobStatsDto
+                    {
+                        Id = job.Id,
+                        Title = job.Title,
+                        MaximumSalary = job.MaximumSalary,
+                        MinimumSalary = job.MinimumSalary,
+                        CompanyName = job.CompanyName,
+                        Locations = _mapper.Map<List<LocationEditDto>>(job.Locations),
+                        CandidateCount = job.Candidates.Count,
+                    })
+                .ToList();
         }
     }
 }

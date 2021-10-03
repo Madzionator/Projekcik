@@ -14,6 +14,7 @@ namespace Projekcik.Core.DTO
         public int? MaximumSalary { get; set; }
         public string CompanyName { get; set; }
         public ICollection<LocationDto> Locations { get; set; }
+        // public ICollection<CandidateDto> Candidate { get; set; }
     }
 
     public class JobEditDto 
@@ -24,6 +25,17 @@ namespace Projekcik.Core.DTO
         public int? MaximumSalary { get; set; }
         public string CompanyName { get; set; }
         public ICollection<int> LocationIds { get; set; }
+    }
+
+    public class JobStatsDto
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+        public int? MinimumSalary { get; set; }
+        public int? MaximumSalary { get; set; }
+        public string CompanyName { get; set; }
+        public ICollection<LocationEditDto> Locations { get; set; }
+        public int CandidateCount { get; set; }
     }
 
     public class JobEditDtoValidator : AbstractValidator<JobEditDto>
