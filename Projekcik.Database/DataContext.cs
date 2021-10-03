@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Projekcik.Database.Models;
 
 namespace Projekcik.Database
@@ -22,6 +23,7 @@ namespace Projekcik.Database
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
         }

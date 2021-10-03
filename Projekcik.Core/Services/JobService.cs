@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Projekcik.Core.DTO;
 using Projekcik.Core.Exceptions;
@@ -89,18 +90,8 @@ namespace Projekcik.Core.Services
         {
             return _context.Jobs
                 .Include(x => x.Locations)
+                .ProjectTo<JobStatsDto>(_mapper.ConfigurationProvider)
                 .AsNoTracking()
-                .Select(job =>
-                    new JobStatsDto
-                    {
-                        Id = job.Id,
-                        Title = job.Title,
-                        MaximumSalary = job.MaximumSalary,
-                        MinimumSalary = job.MinimumSalary,
-                        CompanyName = job.CompanyName,
-                        Locations = _mapper.Map<List<LocationEditDto>>(job.Locations),
-                        CandidateCount = job.Candidates.Count,
-                    })
                 .ToList();
         }
     }

@@ -14,7 +14,6 @@ namespace Projekcik.Core.DTO
         public int? MaximumSalary { get; set; }
         public string CompanyName { get; set; }
         public ICollection<LocationDto> Locations { get; set; }
-        // public ICollection<CandidateDto> Candidate { get; set; }
     }
 
     public class JobEditDto 
