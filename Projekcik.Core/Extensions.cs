@@ -19,6 +19,7 @@ namespace Projekcik.Core
             services.AddScoped<IJobService, JobService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IKeywordService, KeywordService>();
 
             services.AddAutoMapper(typeof(Extensions).Assembly);
 

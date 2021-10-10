@@ -18,6 +18,7 @@ namespace Projekcik.Database.Models
         public DateTime CreatedAt { get; set; }
         public bool IsDeleted { get; set; }
         public Job Job { get; set; }
+        public ICollection<Keyword> Keywords { get; set; }
     }
 
     public class CandidateMap : IEntityTypeConfiguration<Candidate>

@@ -15,6 +15,7 @@ namespace Projekcik.Database
         public DbSet<Location> Locations { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
+        public DbSet<Keyword> Keywords { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
