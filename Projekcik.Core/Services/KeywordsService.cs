@@ -77,13 +77,7 @@ namespace Projekcik.Core.Services
             return _context.Keywords
                 .Include(x => x.Candidate)
                 .AsNoTracking()
-                .Select(keyw =>
-                    new KeywordStatsDto
-                    {
-                        Id =  keyw.Id,
-                        Name = keyw.Name,
-                        CandidateCount = keyw.Candidate.Count,
-                    })
+                .Select(keyw => _mapper.Map<KeywordStatsDto>(keyw))
                 .ToList();
         }
     }
