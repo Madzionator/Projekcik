@@ -8,7 +8,7 @@ namespace Projekcik.Database.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Job> Candidate { get; set; }
+        public ICollection<Candidate> Candidate { get; set; }
     }
 
     public class KeywordMap : IEntityTypeConfiguration<Keyword>
@@ -16,6 +16,7 @@ namespace Projekcik.Database.Models
         public void Configure(EntityTypeBuilder<Keyword> keyword)
         {
             keyword.HasKey(x => x.Id).IsClustered(false);
+            keyword.HasIndex(x => x.Name).IsUnique();
             keyword.Property(x => x.Name).IsRequired().HasMaxLength(64);
         }
     }

@@ -10,8 +10,8 @@ using Projekcik.Database;
 namespace Projekcik.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211010114940_Keywords")]
-    partial class Keywords
+    [Migration("20211011175416_Keywords2")]
+    partial class Keywords2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace Projekcik.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CandidateKeyword", b =>
+                {
+                    b.Property<Guid>("CandidateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("KeywordsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CandidateId", "KeywordsId");
+
+                    b.HasIndex("KeywordsId");
+
+                    b.ToTable("CandidateKeyword");
+                });
 
             modelBuilder.Entity("JobLocation", b =>
                 {
@@ -113,9 +128,6 @@ namespace Projekcik.Database.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int?>("KeywordId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("MaximumSalary")
                         .HasColumnType("int");
 
@@ -133,8 +145,6 @@ namespace Projekcik.Database.Migrations
                     b.HasKey("Id")
                         .IsClustered(false);
 
-                    b.HasIndex("KeywordId");
-
                     b.ToTable("Jobs");
                 });
 
@@ -145,9 +155,6 @@ namespace Projekcik.Database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid?>("CandidateId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -156,7 +163,8 @@ namespace Projekcik.Database.Migrations
                     b.HasKey("Id")
                         .IsClustered(false);
 
-                    b.HasIndex("CandidateId");
+                    b.HasIndex("Id")
+                        .IsUnique();
 
                     b.ToTable("Keywords");
                 });
@@ -201,6 +209,21 @@ namespace Projekcik.Database.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("CandidateKeyword", b =>
+                {
+                    b.HasOne("Projekcik.Database.Models.Candidate", null)
+                        .WithMany()
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projekcik.Database.Models.Keyword", null)
+                        .WithMany()
+                        .HasForeignKey("KeywordsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("JobLocation", b =>
                 {
                     b.HasOne("Projekcik.Database.Models.Job", null)
@@ -229,31 +252,7 @@ namespace Projekcik.Database.Migrations
 
             modelBuilder.Entity("Projekcik.Database.Models.Job", b =>
                 {
-                    b.HasOne("Projekcik.Database.Models.Keyword", null)
-                        .WithMany("Candidate")
-                        .HasForeignKey("KeywordId");
-                });
-
-            modelBuilder.Entity("Projekcik.Database.Models.Keyword", b =>
-                {
-                    b.HasOne("Projekcik.Database.Models.Candidate", null)
-                        .WithMany("Keywords")
-                        .HasForeignKey("CandidateId");
-                });
-
-            modelBuilder.Entity("Projekcik.Database.Models.Candidate", b =>
-                {
-                    b.Navigation("Keywords");
-                });
-
-            modelBuilder.Entity("Projekcik.Database.Models.Job", b =>
-                {
                     b.Navigation("Candidates");
-                });
-
-            modelBuilder.Entity("Projekcik.Database.Models.Keyword", b =>
-                {
-                    b.Navigation("Candidate");
                 });
 #pragma warning restore 612, 618
         }
