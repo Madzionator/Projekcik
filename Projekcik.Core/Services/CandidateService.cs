@@ -17,22 +17,29 @@ namespace Projekcik.Core.Services
         CandidateDto GetCandidate(Guid CandidateId);
         IList<CandidateDto> BrowseCandidates();
         void DeleteCandidate(Guid id);
+        List<KeywordDto> GetCandidateKeywords(string filePath);
     }
 
     public class CandidateService : ICandidateService
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IPdfKeywordExtractor _pdfKeywordExtractor;
+        private readonly IKeywordService _keywordService;
 
-        public CandidateService(DataContext context, IMapper mapper)
+        public CandidateService(DataContext context, IMapper mapper, IPdfKeywordExtractor pdfKeywordExtractor, IKeywordService keywordService)
         {
             _context = context;
             _mapper = mapper;
+            _pdfKeywordExtractor = pdfKeywordExtractor;
+            _keywordService = keywordService;
         }
 
         public void CreateForJob(CandidateDto dto)
         {
             var candidate = _mapper.Map<Candidate>(dto);
+
+            candidate.Keywords = _context.Keywords.Where(keyword => dto.Keywords.Select(x=>x.Id).Contains(keyword.Id)).ToList();
             _context.Candidates.Add(candidate);
             _context.SaveChanges();
         }
@@ -47,6 +54,12 @@ namespace Projekcik.Core.Services
 
             var dto = _mapper.Map<CandidateDto>(candidate);
             return dto;
+        }
+
+        public List<KeywordDto> GetCandidateKeywords(string filePath)
+        {
+            var allKeyWords = _keywordService.Browse();
+            return _pdfKeywordExtractor.Find(filePath, allKeyWords);
         }
 
         public IList<CandidateDto> BrowseCandidates()

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Diagnostics;
+using FluentValidation;
 
 namespace Projekcik.Core.DTO
 {
@@ -6,6 +7,7 @@ namespace Projekcik.Core.DTO
     {
         public string Name { get; set; }
         public int Id { get; set; }
+        public override string ToString() => $"{Id}: {Name}";
     }
     public class KeywordEditDto
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Resources;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +20,7 @@ namespace Projekcik.Api.Controllers
     {
         private readonly ICandidateService _candidateService;
         private readonly IValidator<CandidateDto> _candidateValidator;
+        private readonly IPdfKeywordExtractor _pdfKeywordExtractor;
 
         public CandidateController(ICandidateService candidateService, IValidator<CandidateDto> candidateValidator)
         {
@@ -62,8 +64,13 @@ namespace Projekcik.Api.Controllers
             using var fileStream = new FileStream(filePath, FileMode.Create);
             file.CopyTo(fileStream);
             candidateDto.CvPath = filePath;
+            fileStream.Close();
+
+            var candidateKeywords = _candidateService.GetCandidateKeywords(filePath);
+            candidateDto.Keywords = candidateKeywords;
 
             _candidateService.CreateForJob(candidateDto);
+
             return NoContent();
         }
 

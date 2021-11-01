@@ -15,6 +15,7 @@ namespace Projekcik.Core.DTO
         public string EmailAddress { get; set; }
         public string CvPath { get; set; }
         public string Comment { get; set; }
+        public ICollection<KeywordDto> Keywords { get; set; }
     }
 
     public class CandidateDtoValidator : AbstractValidator<CandidateDto>
