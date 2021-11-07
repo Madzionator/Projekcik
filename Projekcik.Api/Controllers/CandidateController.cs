@@ -61,10 +61,11 @@ namespace Projekcik.Api.Controllers
 
             Directory.CreateDirectory($"/candidates");
             var filePath = $"/candidates/{candidateId}.pdf";
-            using var fileStream = new FileStream(filePath, FileMode.Create);
-            file.CopyTo(fileStream);
-            candidateDto.CvPath = filePath;
-            fileStream.Close();
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+                candidateDto.CvPath = filePath;
+            }
 
             var candidateKeywords = _candidateService.GetCandidateKeywords(filePath);
             candidateDto.Keywords = candidateKeywords;
