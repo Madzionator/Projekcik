@@ -20,6 +20,7 @@ namespace Projekcik.Core
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ICandidateService, CandidateService>();
             services.AddScoped<IKeywordService, KeywordService>();
+            services.AddScoped<IPdfKeywordExtractor, PdfKeywordExtractor>();
 
             services.AddAutoMapper(typeof(Extensions).Assembly);
 
